@@ -25,16 +25,20 @@
     <p>Сделан вручную с любовью и GitHub Pages 💻🌐</p>
   </main>
 
-  <section id="contact">
-    <h2>Форма обратной связи</h2>
-    <form id="contactForm" onsubmit="submitForm(event)">
-      <input type="text" placeholder="Ваше имя" required />
-      <input type="email" placeholder="Ваш Email" required />
-      <textarea placeholder="Ваше сообщение..." required></textarea>
-      <button type="submit">Отправить</button>
-    </form>
-    <p id="formResult"></p>
-  </section>
+ <section id="contact">
+  <h2>Форма обратной связи</h2>
+  <form action="https://formsubmit.co/shoxbro2007@gmail.com" method="POST">
+    <input type="text" name="name" placeholder="Ваше имя" required>
+    <input type="email" name="email" placeholder="Ваш Email" required>
+    <textarea name="message" placeholder="Сообщение" required></textarea>
+
+    <!-- Не показывается, но управляет отправкой -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://shoxbro2007.github.io/HTTP/thanks.html">
+
+    <button type="submit">Отправить</button>
+  </form>
+</section>
 
   <footer>
     <p>© 2025 Мой сайт. Все права защищены.</p>
