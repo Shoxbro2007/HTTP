@@ -5,25 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Обо мне</title>
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
+  <!-- Кастомный курсор -->
+  <div class="custom-cursor"></div>
+  <div class="cursor-follower"></div>
 
   <header>
     <nav class="navbar">
-  <div class="nav-logo">Shoxbro</div>
-  <div class="nav-toggle" onclick="toggleMenu()">☰</div>
-  <div class="nav-links" id="navLinks">
-    <a href="./index.html">Главная</a>
-    <a href="./about.html">Обо мне</a>
-    <a href="./index.html#contact">Связь</a>
-  </div>
-</nav>
+      <div class="nav-logo">Shoxbro</div>
+      <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+      <div class="nav-links" id="navLinks">
+        <a href="./index.html">Главная</a>
+        <a href="./about.html">Обо мне</a>
+        <a href="./index.html#contact">Связь</a>
+      </div>
+    </nav>
   </header>
 
   <main>
-    <h1>Обо мне</h1>
-    <p>Меня зовут Shoxbro, мне 18 лет, и я создаю сайты с нуля.</p>
-    <p>Этот проект опубликован через GitHub Pages и написан вручную.</p>
+    <section class="about-hero glass" data-aos="fade-up">
+      <div class="about-hero-content">
+        <h1>Обо мне</h1>
+        <p>Узнайте больше о моем пути в веб-разработке</p>
+      </div>
+    </section>
+
+    <section class="about-details">
+      <div class="container">
+        <div class="about-card glass" data-aos="fade-right">
+          <div class="about-image">
+            <div class="avatar-glow">
+              <img src="assets/avatar.jpg" alt="Shoxbro">
+            </div>
+          </div>
+          <div class="about-info">
+            <h2>Моя история</h2>
+            <p>Меня зовут Shoxbro, мне 18 лет, и я создаю сайты с нуля. Моё путешествие в мир веб-разработки началось 2 года назад, когда я написал свой первый "Hello World" на HTML.</p>
+            <p>С тех пор я постоянно учусь и совершенствую свои навыки. Этот проект опубликован через GitHub Pages и написан вручную - от первой строчки кода до финального дизайна.</p>
+            
+            <div class="about-stats">
+              <div class="stat-card" data-aos="zoom-in">
+                <i class="fas fa-code"></i>
+                <h3>50+</h3>
+                <p>Проектов</p>
+              </div>
+              <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                <i class="fas fa-clock"></i>
+                <h3>2000+</h3>
+                <p>Часов кодинга</p>
+              </div>
+              <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fas fa-coffee"></i>
+                <h3>∞</h3>
+                <p>Чашек кофе</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="journey-timeline" data-aos="fade-up">
+          <h2>Мой путь</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2023</div>
+              <div class="timeline-content">
+                <h3>Начало карьеры</h3>
+                <p>Первый коммерческий проект - лендинг для местного бизнеса</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2024</div>
+              <div class="timeline-content">
+                <h3>Изучение JavaScript</h3>
+                <p>Углубленное изучение JavaScript и фреймворков</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2025</div>
+              <div class="timeline-content">
+                <h3>Профессиональный рост</h3>
+                <p>Работа над сложными проектами и создание этого сайта-портфолио</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -31,8 +102,15 @@
   </footer>
 
   <script src="./script.js"></script>
-  <!-- Кнопка Telegram -->
-<a href="https://t.me/Shohbro007" target="_blank" class="telegram-button" title="Написать в Telegram"></a>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+    });
+  </script>
 </body>
 </html>
 

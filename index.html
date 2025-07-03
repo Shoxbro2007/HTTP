@@ -7,8 +7,14 @@
   <meta name="description" content="Личный сайт Shoxbro - веб-разработчика. Портфолио, услуги, контакты.">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
+  <!-- Кастомный курсор -->
+  <div class="custom-cursor"></div>
+  <div class="cursor-follower"></div>
+
   <header>
     <nav class="navbar glass">
       <div class="nav-left">
@@ -26,86 +32,243 @@
   </header>
 
   <main>
-    <!-- Hero секция -->
+    <!-- Hero секция с частицами -->
     <section class="hero glass fade-in">
+      <div id="particles-js"></div>
       <div class="hero-content">
-        <h1>Создаю цифровой опыт, который запоминается</h1>
-        <p>Веб-разработчик и дизайнер, превращающий идеи в интерактивные реальности</p>
-        <div class="hero-buttons">
-          <a href="#portfolio" class="cta-button">Мои работы</a>
-          <a href="#contact" class="cta-button" style="background: transparent; color: var(--primary); margin-left: 15px; border-color: var(--primary);">Связаться</a>
+        <div class="hero-text" data-aos="fade-right">
+          <h1>Создаю цифровой опыт, <span class="highlight">который запоминается</span></h1>
+          <p>Веб-разработчик и дизайнер, превращающий идеи в интерактивные реальности</p>
+          <div class="hero-buttons">
+            <a href="#portfolio" class="cta-button pulse">Мои работы</a>
+            <a href="#contact" class="cta-button secondary">Связаться</a>
+          </div>
+        </div>
+        <div class="hero-model" data-aos="fade-left">
+          <div class="cube-container">
+            <div class="cube">
+              <div class="face front"><i class="fas fa-code"></i></div>
+              <div class="face back"><i class="fas fa-palette"></i></div>
+              <div class="face right"><i class="fas fa-mobile-alt"></i></div>
+              <div class="face left"><i class="fas fa-server"></i></div>
+              <div class="face top"><i class="fas fa-rocket"></i></div>
+              <div class="face bottom"><i class="fas fa-database"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Секция "Обо мне" -->
+    <section id="about" class="fade-in" data-aos="fade-up">
+      <div class="about-container glass">
+        <div class="about-image" data-aos="fade-right">
+          <div class="avatar-glow">
+            <img src="assets/avatar.jpg" alt="Shoxbro">
+          </div>
+        </div>
+        <div class="about-content" data-aos="fade-left">
+          <h2>Обо мне</h2>
+          <p>Привет! Я Shoxbro, 18-летний веб-разработчик с страстью к созданию инновационных цифровых решений.</p>
+          <p>Специализируюсь на:</p>
+          <ul class="skills-tags">
+            <li>Frontend разработка</li>
+            <li>UI/UX дизайн</li>
+            <li>Адаптивная верстка</li>
+            <li>Интерактивные интерфейсы</li>
+          </ul>
+          <a href="./about.html" class="cta-button">Подробнее</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Секция "Навыки" -->
+    <section id="skills" class="fade-in delay-1" data-aos="fade-up">
+      <h2>Мои навыки</h2>
+      <p class="section-subtitle">Технологии, которые я использую для создания впечатляющих веб-решений</p>
+      
+      <div class="skills-grid">
+        <div class="skill-card" data-aos="zoom-in">
+          <div class="skill-header">
+            <i class="fab fa-html5"></i>
+            <h3>HTML5 & CSS3</h3>
+          </div>
+          <div class="skill-progress">
+            <div class="progress-bar" style="width: 95%"><span>95%</span></div>
+          </div>
+        </div>
+        
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+          <div class="skill-header">
+            <i class="fab fa-js"></i>
+            <h3>JavaScript</h3>
+          </div>
+          <div class="skill-progress">
+            <div class="progress-bar" style="width: 85%"><span>85%</span></div>
+          </div>
+        </div>
+        
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+          <div class="skill-header">
+            <i class="fab fa-react"></i>
+            <h3>React</h3>
+          </div>
+          <div class="skill-progress">
+            <div class="progress-bar" style="width: 75%"><span>75%</span></div>
+          </div>
+        </div>
+        
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
+          <div class="skill-header">
+            <i class="fas fa-paint-brush"></i>
+            <h3>UI/UX Дизайн</h3>
+          </div>
+          <div class="skill-progress">
+            <div class="progress-bar" style="width: 80%"><span>80%</span></div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Портфолио -->
-    <section id="portfolio" class="fade-in delay-1">
-      <h2 style="text-align: center; margin-bottom: 20px; font-size: 2.5rem;">Мои проекты</h2>
-      <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">Каждый проект - это уникальная история успеха и инноваций</p>
+    <section id="portfolio" class="fade-in delay-2" data-aos="fade-up">
+      <h2>Мои проекты</h2>
+      <p class="section-subtitle">Каждый проект - это уникальная история успеха и инноваций</p>
       
       <div class="portfolio-grid">
-        <div class="portfolio-item glass">
+        <div class="portfolio-item glass" data-aos="flip-left">
           <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Проект 1" class="portfolio-img">
           <div class="portfolio-overlay">
             <h3>Корпоративный сайт</h3>
             <p>Полный цикл разработки для IT компании</p>
-            <a href="#" class="cta-button" style="margin-top: 15px;">Подробнее</a>
+            <a href="#" class="cta-button">Подробнее</a>
           </div>
         </div>
         
-        <div class="portfolio-item glass">
+        <div class="portfolio-item glass" data-aos="flip-left" data-aos-delay="100">
           <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Проект 2" class="portfolio-img">
           <div class="portfolio-overlay">
             <h3>Интернет-магазин</h3>
             <p>E-commerce решение с кастомной CMS</p>
-            <a href="#" class="cta-button" style="margin-top: 15px;">Подробнее</a>
+            <a href="#" class="cta-button">Подробнее</a>
           </div>
         </div>
         
-        <div class="portfolio-item glass">
+        <div class="portfolio-item glass" data-aos="flip-left" data-aos-delay="200">
           <img src="https://images.unsplash.com/photo-1463171379579-3fdfb86d6285?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Проект 3" class="portfolio-img">
           <div class="portfolio-overlay">
             <h3>Мобильное приложение</h3>
             <p>Кроссплатформенное решение для iOS и Android</p>
-            <a href="#" class="cta-button" style="margin-top: 15px;">Подробнее</a>
+            <a href="#" class="cta-button">Подробнее</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Контакты -->
-    <section id="contact" class="glass fade-in delay-2">
-      <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.5rem;">Свяжитесь со мной</h2>
-      <form class="contact-form" action="https://formsubmit.co/shoxbro2007@gmail.com" method="POST">
-        <input type="text" name="name" placeholder="Ваше имя" required>
-        <input type="email" name="email" placeholder="Ваш Email" required>
-        <textarea name="message" placeholder="Сообщение" rows="5" required></textarea>
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://shoxbro2007.github.io/HTTP/thanks.html">
-        <button type="submit">Отправить сообщение</button>
-      </form>
+    <section id="contact" class="glass fade-in delay-3" data-aos="fade-up">
+      <h2>Свяжитесь со мной</h2>
+      <p class="section-subtitle">Готов к новым вызовам и интересным проектам</p>
+      
+      <div class="contact-container">
+        <div class="contact-info" data-aos="fade-right">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h3>Email</h3>
+              <p>shoxbro2007@gmail.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-telegram"></i>
+            <div>
+              <h3>Telegram</h3>
+              <p>@Shoxbro2007</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-github"></i>
+            <div>
+              <h3>GitHub</h3>
+              <p>github.com/shoxbro2007</p>
+            </div>
+          </div>
+        </div>
+        
+        <form class="contact-form" action="https://formsubmit.co/shoxbro2007@gmail.com" method="POST" data-aos="fade-left">
+          <input type="text" name="name" placeholder="Ваше имя" required>
+          <input type="email" name="email" placeholder="Ваш Email" required>
+          <textarea name="message" placeholder="Сообщение" rows="5" required></textarea>
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://shoxbro2007.github.io/HTTP/thanks.html">
+          <button type="submit" class="cta-button">Отправить сообщение</button>
+        </form>
+      </div>
     </section>
   </main>
 
-  <footer class="fade-in delay-3">
-    <div class="social-links">
-      <a href="https://t.me/Shoxbro2007" target="_blank" class="social-icon">
-        <i class="fab fa-telegram"></i>
-      </a>
-      <a href="https://github.com/shoxbro2007" target="_blank" class="social-icon">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="mailto:shoxbro2007@gmail.com" class="social-icon">
-        <i class="fas fa-envelope"></i>
-      </a>
-      <a href="#" class="social-icon">
-        <i class="fab fa-linkedin"></i>
-      </a>
+  <footer class="fade-in delay-4">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <div class="nav-logo">Shoxbro</div>
+        <p>Создаю цифровой опыт, который запоминается</p>
+      </div>
+      
+      <div class="footer-links">
+        <h3>Навигация</h3>
+        <a href="./index.html">Главная</a>
+        <a href="./about.html">Обо мне</a>
+        <a href="#portfolio">Портфолио</a>
+        <a href="#contact">Контакты</a>
+      </div>
+      
+      <div class="footer-social">
+        <h3>Соцсети</h3>
+        <div class="social-links">
+          <a href="https://t.me/Shoxbro2007" target="_blank" class="social-icon">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://github.com/shoxbro2007" target="_blank" class="social-icon">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="mailto:shoxbro2007@gmail.com" class="social-icon">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
     </div>
-    <p>© 2025 Shoxbro. Все права защищены</p>
-    <p style="margin-top: 10px;">Создано с ❤️ и JavaScript</p>
+    
+    <div class="copyright">
+      <p>© 2025 Shoxbro. Все права защищены</p>
+      <p>Создано с ❤️ и JavaScript</p>
+    </div>
   </footer>
 
+  <!-- Скрипты -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="script.js"></script>
+  
+  <script>
+    // Инициализация библиотек
+    document.addEventListener('DOMContentLoaded', () => {
+      // Анимации при скролле
+      AOS.init({
+        duration: 800,
+        once: true,
+        easing: 'ease-in-out'
+      });
+      
+      // Инициализация частиц
+      if (typeof particlesJS !== 'undefined') {
+        particlesJS.load('particles-js', 'particles.json', function() {
+          console.log('Particles.js loaded');
+        });
+      }
+    });
+  </script>
 </body>
 </html>
