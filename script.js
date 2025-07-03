@@ -291,3 +291,60 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
   voiceAssistant.style.display = 'none';
   console.warn('Браузер не поддерживает SpeechRecognition');
 }
+if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+    const warning = document.createElement('div');
+    warning.innerHTML = 'Голосовой помощник не поддерживается в вашем браузере. Попробуйте Chrome или Edge.';
+    warning.style.background = 'var(--error)';
+    warning.style.color = 'white';
+    warning.style.padding = '10px';
+    warning.style.position = 'fixed';
+    warning.style.bottom = '0';
+    warning.style.width = '100%';
+    warning.style.textAlign = 'center';
+    warning.style.zIndex = '10000';
+    document.body.appendChild(warning);
+}
+// Добавить перед recognition.start()
+navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(() => recognition.start())
+    .catch(err => {
+        console.error('Доступ к микрофону запрещен:', err);
+        alert('Пожалуйста, разрешите доступ к микрофону в настройках браузера');
+    });
+    recognition.onerror = function(event) {
+    console.error('Ошибка распознавания:', event.error);
+    
+    const errors = {
+        'no-speech': 'Речь не обнаружена',
+        'audio-capture': 'Микрофон недоступен',
+        'not-allowed': 'Доступ запрещен',
+        'aborted': 'Распознавание прервано',
+        'network': 'Сетевая ошибка',
+        'language-not-supported': 'Язык не поддерживается'
+    };
+    
+    const message = errors[event.error] || `Неизвестная ошибка: ${event.error}`;
+    alert(`Ошибка голосового помощника: ${message}`);
+    
+    // Показать иконку ошибки
+    voiceAssistant.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+    voiceAssistant.style.background = 'var(--error)';
+};
+// В функции инициализации
+if (!('SpeechRecognition' in window)) {
+    document.getElementById('voice-fallback').style.display = 'block';
+    voiceAssistant.style.display = 'none';
+}
+
+// Общая функция выполнения команд
+function executeCommand(cmd) {
+    switch(cmd) {
+        case 'portfolio': 
+            document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'});
+            break;
+        case 'contacts':
+            document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
+            break;
+        // ... другие команды
+    }
+}
