@@ -6,13 +6,15 @@
     <title>Метавселенная PRO</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe@1.2.0/dist/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/webxr/XRControllerModelFactory.js"></script>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="main.js" defer></script>
 </head>
 <body>
-    <!-- Экран загрузки с прогрессом -->
+    <!-- Экран загрузки -->
     <div id="loading-screen">
         <div class="loader"></div>
         <p id="loading-text">Инициализация метавселенной...</p>
@@ -20,36 +22,42 @@
             <div id="loading-bar"></div>
         </div>
     </div>
-    
-    <!-- Основные элементы интерфейса -->
+
+    <!-- Контейнер для 3D сцены -->
+    <div id="metaverse-container"></div>
+
+    <!-- Основной интерфейс -->
     <div id="ui-container">
+        <!-- Уведомления -->
+        <div id="notification-container"></div>
+
         <!-- Панель режимов -->
         <div id="mode-panel">
             <button id="vr-btn" class="mode-btn">VR</button>
             <button id="ar-btn" class="mode-btn">AR</button>
             <button id="3d-btn" class="mode-btn active">3D</button>
         </div>
-        
+
         <!-- Панель пользователя -->
         <div id="user-panel">
             <div id="avatar-container" class="clickable">
                 <div id="avatar"></div>
-                <div id="user-name"></div>
+                <div id="user-info"></div>
             </div>
-            <div id="main-menu">
-                <button class="menu-btn" data-section="learn">🎓 Обучение</button>
-                <button class="menu-btn" data-section="work">💼 Работа</button>
-                <button class="menu-btn" data-section="fun">🎮 Развлечения</button>
-                <button class="menu-btn" data-section="social">👥 Социальная</button>
-                <button class="menu-btn" data-section="games">🎲 Игры</button>
+            
+            <div id="action-buttons">
+                <button class="action-btn" data-mode="learn">🎓 Обучение</button>
+                <button class="action-btn" data-mode="work">💼 Работа</button>
+                <button class="action-btn" data-mode="fun">🎮 Развлечения</button>
             </div>
-            <div id="status-bar">
-                <div class="status-item">🕒 <span id="time-spent">0m</span></div>
-                <div class="status-item">🏆 <span id="achievements-count">0</span></div>
-                <div class="status-item">👥 <span id="friends-online">0</span></div>
+            
+            <div id="stats">
+                <div class="stat"><span>⏳</span> <span id="time-spent">0m</span></div>
+                <div class="stat"><span>🏆</span> <span id="achievements-count">0</span></div>
+                <div class="stat"><span>👥</span> <span id="friends-online">0</span></div>
             </div>
         </div>
-        
+
         <!-- Чат -->
         <div id="chat-panel">
             <div id="chat-messages"></div>
@@ -59,15 +67,34 @@
             </div>
         </div>
     </div>
-    
-    <!-- Контейнер для 3D/VR/AR -->
-    <div id="metaverse-container"></div>
-    
+
     <!-- Модальные окна -->
     <div id="avatar-modal" class="modal">
-        <!-- Содержимое остается таким же -->
+        <div class="modal-content">
+            <h2>Выберите аватар</h2>
+            
+            <div class="avatar-options">
+                <div class="avatar-option" data-avatar="1">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4333/4333609.png" alt="Аватар 1">
+                </div>
+                <div class="avatar-option" data-avatar="2">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3667/3667325.png" alt="Аватар 2">
+                </div>
+                <div class="avatar-option" data-avatar="3">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Аватар 3">
+                </div>
+            </div>
+            
+            <div class="custom-avatar">
+                <h3>Или загрузите свой</h3>
+                <input type="text" id="custom-avatar-url" placeholder="URL изображения">
+                <button id="set-custom-avatar">Установить</button>
+            </div>
+            
+            <button id="close-avatar-modal">Закрыть</button>
+        </div>
     </div>
-    
+
     <div id="friends-modal" class="modal">
         <div class="modal-content">
             <h2>Друзья</h2>
@@ -79,7 +106,7 @@
             <button class="close-modal">Закрыть</button>
         </div>
     </div>
-    
+
     <div id="games-modal" class="modal">
         <div class="modal-content">
             <h2>Мини-игры</h2>
@@ -100,12 +127,12 @@
             <button class="close-modal">Закрыть</button>
         </div>
     </div>
-    
+
     <!-- AR маркер (для AR режима) -->
     <div id="ar-marker" style="display:none;">
         <img src="https://storage.googleapis.com/ar-js-inaturalist/marker-files/hiro.png" alt="AR Marker">
     </div>
-    
+
     <!-- Шаблоны -->
     <template id="friend-template">
         <div class="friend-item">
@@ -117,7 +144,7 @@
             <button class="chat-with-friend">💬</button>
         </div>
     </template>
-    
+
     <template id="message-template">
         <div class="message">
             <div class="message-avatar"></div>
