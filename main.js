@@ -841,3 +841,8 @@ function setupEventListeners() {
 // ======================
 
 // Инициализация уже запускается через DOMContentLoaded
+function addFriend(name) {
+  AppState.userData.friends.push({ name, status: "онлайн" });
+  saveUserData();
+  updateFriendsUI();
+}
