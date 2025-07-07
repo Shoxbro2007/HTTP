@@ -56,6 +56,16 @@ const MetaverseConfig = {
             title: 'Завсегдатай', 
             description: 'Провели более 1 часа в метавселенной',
             icon: '⏳'
+        },
+        socializer: {
+            title: 'Социальный',
+            description: 'Добавили первого друга',
+            icon: '👥'
+        },
+        gamer: {
+            title: 'Игроман',
+            description: 'Сыграли во все мини-игры',
+            icon: '🎮'
         }
     }
 };
@@ -84,7 +94,9 @@ const AppState = {
             timeSpent: 0,    // В минутах
             lastLogin: null
         },
-        activityHistory: []
+        activityHistory: [],
+        friends: [],
+        gamesPlayed: []
     },
     
     // 3D объекты на сцене
@@ -94,7 +106,10 @@ const AppState = {
     sessionStartTime: null,
     
     // WebSocket соединение
-    socket: null
+    socket: null,
+    
+    // Сообщения чата
+    chatMessages: []
 };
 
 // Инициализация приложения при загрузке страницы
@@ -124,6 +139,9 @@ function initApp() {
         
         // 6. Запускаем таймер сессии
         startSessionTimer();
+        
+        // 7. Инициализируем чат
+        updateChatUI();
     });
 }
 
@@ -137,13 +155,23 @@ function showLoadingScreen(callback) {
     loadingScreen.style.opacity = '1';
     loadingScreen.style.display = 'flex';
     
-    setTimeout(() => {
-        loadingScreen.style.opacity = '0';
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-            callback();
-        }, 1000);
-    }, 2000);
+    // Анимация прогресс-бара
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+        progress += 5;
+        document.getElementById('loading-bar').style.width = `${progress}%`;
+        
+        if (progress >= 100) {
+            clearInterval(progressInterval);
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    callback();
+                }, 1000);
+            }, 300);
+        }
+    }, 100);
 }
 
 // Инициализация 3D сцены
@@ -317,7 +345,9 @@ function resetUserData() {
             timeSpent: 0,
             lastLogin: new Date().toISOString()
         },
-        activityHistory: []
+        activityHistory: [],
+        friends: [],
+        gamesPlayed: []
     };
 }
 
@@ -345,6 +375,9 @@ function updateUI() {
     
     // 4. Время в метавселенной
     updateTimeSpentUI();
+    
+    // 5. Друзья онлайн
+    updateFriendsOnline();
 }
 
 // Обновление аватара в UI
@@ -379,6 +412,12 @@ function updateTimeSpentUI() {
     const minutes = AppState.userData.stats.timeSpent % 60;
     document.getElementById('time-spent').textContent = 
         `${hours > 0 ? `${hours}h ` : ''}${minutes}m`;
+}
+
+// Обновление счетчика друзей онлайн
+function updateFriendsOnline() {
+    const onlineFriends = AppState.userData.friends.filter(friend => friend.status === 'онлайн');
+    document.getElementById('friends-online').textContent = onlineFriends.length;
 }
 
 // ======================
@@ -447,6 +486,163 @@ function setAvatar(url) {
         showNotification('Не удалось загрузить изображение');
     };
     img.src = url;
+}
+
+// Показ модального окна друзей
+function showFriendsModal() {
+    const modal = document.getElementById('friends-modal');
+    modal.style.display = 'flex';
+    
+    // Заполнение списка друзей
+    const friendsList = document.getElementById('friends-list');
+    friendsList.innerHTML = '';
+    
+    AppState.userData.friends.forEach(friend => {
+        const friendTemplate = document.getElementById('friend-template');
+        const friendElement = friendTemplate.content.cloneNode(true);
+        
+        // Аватар друга
+        const avatar = friendElement.querySelector('.friend-avatar');
+        avatar.textContent = friend.name.charAt(0).toUpperCase();
+        avatar.style.backgroundColor = stringToColor(friend.name);
+        
+        friendElement.querySelector('.friend-name').textContent = friend.name;
+        friendElement.querySelector('.friend-status').textContent = friend.status;
+        
+        // Кнопка чата с другом
+        friendElement.querySelector('.chat-with-friend').addEventListener('click', () => {
+            const chatInput = document.getElementById('chat-input');
+            chatInput.value = `@${friend.name} `;
+            chatInput.focus();
+            modal.style.display = 'none';
+            showNotification(`Начат чат с ${friend.name}`);
+        });
+        
+        friendsList.appendChild(friendElement);
+    });
+    
+    // Добавление друга
+    document.getElementById('add-friend-btn').addEventListener('click', addFriend);
+    
+    // Закрытие модального окна
+    document.querySelector('#friends-modal .close-modal').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+}
+
+// Добавление друга
+function addFriend() {
+    const friendNameInput = document.getElementById('friend-username');
+    const friendName = friendNameInput.value.trim();
+    
+    if (!friendName) {
+        showNotification('Введите имя друга');
+        return;
+    }
+    
+    // Проверка на дубликат
+    if (AppState.userData.friends.some(f => f.name === friendName)) {
+        showNotification('Этот друг уже добавлен');
+        return;
+    }
+    
+    // Добавление друга
+    AppState.userData.friends.push({
+        name: friendName,
+        status: Math.random() > 0.5 ? 'онлайн' : 'офлайн'
+    });
+    
+    saveUserData();
+    updateUI();
+    showFriendsModal();
+    friendNameInput.value = '';
+    
+    // Разблокировка достижения
+    if (AppState.userData.friends.length === 1) {
+        unlockAchievement('socializer');
+    }
+}
+
+// Показ модального окна мини-игр
+function showGamesModal() {
+    const modal = document.getElementById('games-modal');
+    modal.style.display = 'flex';
+    
+    // Обработка выбора игры
+    document.querySelectorAll('.game-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const game = this.getAttribute('data-game');
+            launchMiniGame(game);
+            modal.style.display = 'none';
+        });
+    });
+    
+    // Закрытие модального окна
+    document.querySelector('#games-modal .close-modal').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+}
+
+// Запуск мини-игры
+function launchMiniGame(game) {
+    let gameName = '';
+    switch (game) {
+        case 'quiz':
+            gameName = 'Викторина';
+            break;
+        case 'platformer':
+            gameName = 'Платформер';
+            break;
+        case 'puzzle':
+            gameName = 'Головоломка';
+            break;
+    }
+    
+    // Добавление в историю игр
+    if (!AppState.userData.gamesPlayed.includes(game)) {
+        AppState.userData.gamesPlayed.push(game);
+        saveUserData();
+        
+        // Проверка достижений
+        if (AppState.userData.gamesPlayed.length === 3) {
+            unlockAchievement('gamer');
+        }
+    }
+    
+    showNotification(`Запуск игры: ${gameName}`);
+}
+
+// Показ модального окна достижений
+function showAchievementsModal() {
+    const modal = document.getElementById('achievements-modal');
+    modal.style.display = 'flex';
+    
+    const achievementsList = document.getElementById('achievements-list');
+    achievementsList.innerHTML = '';
+    
+    // Отображение всех достижений
+    Object.entries(MetaverseConfig.achievements).forEach(([id, achievement]) => {
+        const template = document.getElementById('achievement-template');
+        const achievementElement = template.content.cloneNode(true);
+        
+        const unlocked = AppState.userData.achievements.includes(id);
+        
+        achievementElement.querySelector('.achievement-icon').textContent = 
+            unlocked ? achievement.icon : '🔒';
+            
+        achievementElement.querySelector('.achievement-title').textContent = 
+            unlocked ? achievement.title : 'Заблокировано';
+            
+        achievementElement.querySelector('.achievement-description').textContent = 
+            unlocked ? achievement.description : 'Достижение еще не получено';
+            
+        achievementsList.appendChild(achievementElement);
+    });
+    
+    // Закрытие модального окна
+    document.querySelector('#achievements-modal .close-modal').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 }
 
 // ======================
@@ -781,6 +977,64 @@ function unlockAchievement(id) {
 }
 
 // ======================
+// ЧАТ
+// ======================
+
+// Отправка сообщения в чат
+function sendChatMessage() {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Создание объекта сообщения
+    const newMessage = {
+        sender: AppState.userData.username || 'Гость',
+        text: message,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+    
+    // Добавление в историю
+    AppState.chatMessages.push(newMessage);
+    
+    // Ограничение истории
+    if (AppState.chatMessages.length > 100) {
+        AppState.chatMessages.shift();
+    }
+    
+    // Обновление UI
+    updateChatUI();
+    
+    // Очистка поля ввода
+    input.value = '';
+}
+
+// Обновление интерфейса чата
+function updateChatUI() {
+    const chatMessagesContainer = document.getElementById('chat-messages');
+    chatMessagesContainer.innerHTML = '';
+    
+    AppState.chatMessages.forEach(message => {
+        const template = document.getElementById('message-template');
+        const messageElement = template.content.cloneNode(true);
+        
+        // Аватар отправителя
+        const avatar = messageElement.querySelector('.message-avatar');
+        avatar.textContent = message.sender.charAt(0).toUpperCase();
+        avatar.style.backgroundColor = stringToColor(message.sender);
+        
+        messageElement.querySelector('.message-sender').textContent = message.sender;
+        messageElement.querySelector('.message-time').textContent = message.time;
+        messageElement.querySelector('.message-text').textContent = message.text;
+        
+        chatMessagesContainer.appendChild(messageElement);
+    });
+    
+    // Прокрутка вниз
+    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+}
+
+// ======================
 // ТАЙМЕР СЕССИИ
 // ======================
 
@@ -819,30 +1073,39 @@ function setupEventListeners() {
     });
     
     // 2. Кнопки действий
-    document.querySelectorAll('.action-btn').forEach(btn => {
+    document.querySelectorAll('.action-btn[data-mode]').forEach(btn => {
         btn.addEventListener('click', function() {
             const mode = this.getAttribute('data-mode');
             setMode(mode);
         });
     });
     
-    // 3. Обработка кликов по 3D объектам
+    // 3. Кнопка друзей
+    document.getElementById('friends-btn').addEventListener('click', showFriendsModal);
+    
+    // 4. Кнопка игр
+    document.getElementById('games-btn').addEventListener('click', showGamesModal);
+    
+    // 5. Обработка кликов по 3D объектам
     window.addEventListener('click', onObjectClick, false);
     
-    // 4. Обработка выхода
+    // 6. Отправка сообщений
+    document.getElementById('send-btn').addEventListener('click', sendChatMessage);
+    document.getElementById('chat-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendChatMessage();
+        }
+    });
+    
+    // 7. Клик по аватару
+    document.getElementById('avatar-container').addEventListener('click', showAvatarModal);
+    
+    // 8. Клик по достижениям
+    document.getElementById('achievements-count').addEventListener('click', showAchievementsModal);
+    
+    // 9. Обработка выхода
     window.addEventListener('beforeunload', () => {
         clearInterval(AppState.sessionTimer);
         saveUserData();
     });
-}
-
-// ======================
-// ЗАПУСК ПРИЛОЖЕНИЯ
-// ======================
-
-// Инициализация уже запускается через DOMContentLoaded
-function addFriend(name) {
-  AppState.userData.friends.push({ name, status: "онлайн" });
-  saveUserData();
-  updateFriendsUI();
 }

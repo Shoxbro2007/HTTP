@@ -49,6 +49,8 @@
                 <button class="action-btn" data-mode="learn">🎓 Обучение</button>
                 <button class="action-btn" data-mode="work">💼 Работа</button>
                 <button class="action-btn" data-mode="fun">🎮 Развлечения</button>
+                <button id="friends-btn" class="action-btn">👥 Друзья</button>
+                <button id="games-btn" class="action-btn">🎲 Игры</button>
             </div>
             
             <div id="stats">
@@ -128,6 +130,14 @@
         </div>
     </div>
 
+    <div id="achievements-modal" class="modal">
+        <div class="modal-content">
+            <h2>Достижения</h2>
+            <div id="achievements-list"></div>
+            <button class="close-modal">Закрыть</button>
+        </div>
+    </div>
+
     <!-- AR маркер (для AR режима) -->
     <div id="ar-marker" style="display:none;">
         <img src="https://storage.googleapis.com/ar-js-inaturalist/marker-files/hiro.png" alt="AR Marker">
@@ -154,6 +164,16 @@
                     <span class="message-time"></span>
                 </div>
                 <div class="message-text"></div>
+            </div>
+        </div>
+    </template>
+
+    <template id="achievement-template">
+        <div class="achievement-item">
+            <div class="achievement-icon"></div>
+            <div class="achievement-info">
+                <h3 class="achievement-title"></h3>
+                <p class="achievement-description"></p>
             </div>
         </div>
     </template>
