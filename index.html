@@ -1,6 +1,88 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Добавлены новые мета-теги и favicon -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a2e">
+    <link rel="icon" href="favicon.ico">
+    <title>Метавселенная PRO 2.0</title>
+    <link rel="icon" href="data:,"> <!-- Пустая иконка -->
+    <!-- Обновлённые стили и скрипты -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/webxr/XRControllerModelFactory.js"></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="main.js" type="module" defer></script>
+</head>
+<body>
+    <!-- Добавлен прелоадер с анимацией -->
+    <div id="preloader">
+        <div class="loader"></div>
+        <p>Загрузка метавселенной...</p>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <!-- Основная структура остаётся, но с новыми элементами -->
+    <div id="metaverse-container"></div>
+    
+    <div id="ui-container">
+        <!-- Добавлена мини-карта -->
+        <div id="mini-map"></div>
+        
+        <!-- Обновлённая панель режимов -->
+        <div id="mode-panel">
+            <button id="vr-btn">VR</button>
+            <button id="ar-btn">AR</button>
+            <button id="3d-btn" class="active">3D</button>
+            <button id="settings-btn">⚙️</button>
+        </div>
+
+        <!-- Дополненная панель пользователя -->
+        <div id="user-panel">
+            <div id="avatar-container">
+                <div id="avatar"></div>
+                <div id="user-info">
+                    <span class="username"></span>
+                    <span class="level">Уровень: 1</span>
+                </div>
+            </div>
+            
+            <!-- Добавлен опыт и валюта -->
+            <div class="experience-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="currency">100 монет</div>
+            
+            <!-- Остальные элементы остаются -->
+        </div>
+
+        <!-- Чат с улучшениями -->
+        <div id="chat-panel">
+            <!-- Добавлены вкладки -->
+            <div class="chat-tabs">
+                <button class="active">Общий</button>
+                <button>Группы</button>
+                <button>Приват</button>
+            </div>
+            <!-- Остальное без изменений -->
+        </div>
+    </div>
+
+    <!-- Новые модальные окна -->
+    <div id="inventory-modal" class="modal">
+        <!-- Содержимое инвентаря -->
+    </div>
+
+    <div id="shop-modal" class="modal">
+        <!-- Виртуальный магазин -->
+    </div>
+
+    <!-- Остальные модальные окна остаются -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Метавселенная PRO</title>

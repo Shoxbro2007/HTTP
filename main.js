@@ -1,116 +1,6 @@
 // Конфигурация метавселенной
-const MetaverseConfig = {
-    // Цветовые темы
-    themes: {
-        default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
-        nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
-        tech: { background: 0x0d47a1, primaryColor: '#3498db' },
-        dark: { background: 0x111111, primaryColor: '#9b59b6' },
-        light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
-    },
-    
-    // Варианты аватаров
-    avatarOptions: [
-        'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
-        'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
-        'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
-    ],
-    
-    // Настройки режимов
-    modeSettings: {
-        learn: { 
-            background: 0x1a237e, 
-            objects: ['book', 'laptop', 'blackboard'],
-            description: 'Режим обучения и развития'
-        },
-        work: { 
-            background: 0x263238, 
-            objects: ['desk', 'computer', 'chart'],
-            description: 'Рабочее пространство'
-        },
-        fun: { 
-            background: 0x4a148c, 
-            objects: ['gamepad', 'ball', 'dancefloor'],
-            description: 'Зона развлечений'
-        }
-    },
-    
-    // Достижения
-    achievements: {
-        first_learn: { 
-            title: 'Любознательный', 
-            description: 'Впервые использовали режим обучения',
-            icon: '📚'
-        },
-        all_modes: { 
-            title: 'Исследователь', 
-            description: 'Попробовали все режимы метавселенной',
-            icon: '🌐'
-        },
-        vr_explorer: { 
-            title: 'VR Пионер', 
-            description: 'Впервые использовали VR режим',
-            icon: '👓'
-        },
-        long_session: { 
-            title: 'Завсегдатай', 
-            description: 'Провели более 1 часа в метавселенной',
-            icon: '⏳'
-        },
-        socializer: {
-            title: 'Социальный',
-            description: 'Добавили первого друга',
-            icon: '👥'
-        },
-        gamer: {
-            title: 'Игроман',
-            description: 'Сыграли во все мини-игры',
-            icon: '🎮'
-        }
-    }
-};
 
 // Состояние приложения
-const AppState = {
-    // THREE.js элементы
-    scene: null,
-    camera: null,
-    renderer: null,
-    
-    // Состояние VR
-    vrEnabled: false,
-    
-    // Текущий режим
-    currentMode: null,
-    
-    // Данные пользователя
-    userData: {
-        username: '',
-        avatar: '',
-        theme: 'default',
-        interests: [],
-        achievements: [],
-        stats: {
-            timeSpent: 0,    // В минутах
-            lastLogin: null
-        },
-        activityHistory: [],
-        friends: [],
-        gamesPlayed: []
-    },
-    
-    // 3D объекты на сцене
-    objects: [],
-    
-    // Время начала сессии
-    sessionStartTime: null,
-    
-    // WebSocket соединение
-    socket: null,
-    
-    // Сообщения чата
-    chatMessages: []
-};
 
 // Инициализация приложения при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
@@ -131,7 +21,46 @@ function initApp() {
         setupEventListeners();
         
         // 5. Если первый вход, показываем модальное окно
-        if (!AppState.userData.username) {
+        if (!({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.username) {
             showUsernameModal();
         } else {
             showWelcomeBackNotification();
@@ -177,26 +106,299 @@ function showLoadingScreen(callback) {
 // Инициализация 3D сцены
 function init3DScene() {
     // 1. Создаем сцену
-    AppState.scene = new THREE.Scene();
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene = new THREE.Scene();
     updateSceneTheme();
     
     // 2. Настраиваем камеру
-    AppState.camera = new THREE.PerspectiveCamera(
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).camera = new THREE.PerspectiveCamera(
         75, 
         window.innerWidth / window.innerHeight, 
         0.1, 
         1000
     );
-    AppState.camera.position.z = 5;
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).camera.position.z = 5;
     
     // 3. Создаем рендерер
-    AppState.renderer = new THREE.WebGLRenderer({ 
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer = new THREE.WebGLRenderer({ 
         antialias: true,
         alpha: true
     });
-    AppState.renderer.setSize(window.innerWidth, window.innerHeight);
-    AppState.renderer.setPixelRatio(window.devicePixelRatio);
-    document.getElementById('metaverse-container').appendChild(AppState.renderer.domElement);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.setSize(window.innerWidth, window.innerHeight);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.setPixelRatio(window.devicePixelRatio);
+    document.getElementById('metaverse-container').appendChild(({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).renderer.domElement);
     
     // 4. Добавляем освещение
     addBasicLights();
@@ -215,17 +417,134 @@ function init3DScene() {
 function addBasicLights() {
     // 1. Фоновое освещение
     const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
-    AppState.scene.add(ambientLight);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene.add(ambientLight);
     
     // 2. Направленный свет
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(1, 1, 1);
-    AppState.scene.add(directionalLight);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene.add(directionalLight);
     
     // 3. Точечный свет
     const pointLight = new THREE.PointLight(0x4cc9f0, 1, 10);
     pointLight.position.set(0, 2, 2);
-    AppState.scene.add(pointLight);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene.add(pointLight);
 }
 
 // Добавление стандартных объектов
@@ -242,8 +561,86 @@ function addDefaultObjects() {
         type: 'welcome',
         name: 'Приветственный куб'
     };
-    AppState.scene.add(cube);
-    AppState.objects.push(cube);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene.add(cube);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).objects.push(cube);
     
     // 2. Сфера для обучения
     const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
@@ -259,8 +656,86 @@ function addDefaultObjects() {
         type: 'learn',
         name: 'Сфера знаний'
     };
-    AppState.scene.add(sphere);
-    AppState.objects.push(sphere);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene.add(sphere);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).objects.push(sphere);
     
     // 3. Тор для развлечений
     const torusGeometry = new THREE.TorusGeometry(0.5, 0.2, 16, 100);
@@ -275,8 +750,86 @@ function addDefaultObjects() {
         type: 'fun',
         name: 'Кольцо развлечений'
     };
-    AppState.scene.add(torus);
-    AppState.objects.push(torus);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene.add(torus);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).objects.push(torus);
 }
 
 // ======================
@@ -288,7 +841,46 @@ function animate() {
     requestAnimationFrame(animate);
     
     // Вращение интерактивных объектов
-    AppState.objects.forEach(obj => {
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).objects.forEach(obj => {
         if (obj.userData.interactive) {
             obj.rotation.x += 0.005;
             obj.rotation.y += 0.01;
@@ -296,19 +888,370 @@ function animate() {
     });
     
     // Рендеринг сцены
-    AppState.renderer.render(AppState.scene, AppState.camera);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.render(({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).scene, ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).camera);
     
     // Обновление VR сессии, если активна
-    if (AppState.vrEnabled && AppState.renderer.xr.isPresenting) {
-        AppState.renderer.xr.update();
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).vrEnabled && ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.xr.isPresenting) {
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).renderer.xr.update();
     }
 }
 
 // Обработка изменения размера окна
 function handleWindowResize() {
-    AppState.camera.aspect = window.innerWidth / window.innerHeight;
-    AppState.camera.updateProjectionMatrix();
-    AppState.renderer.setSize(window.innerWidth, window.innerHeight);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).camera.aspect = window.innerWidth / window.innerHeight;
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).camera.updateProjectionMatrix();
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 // ======================
@@ -321,8 +1264,86 @@ function loadUserData() {
     
     if (savedData) {
         try {
-            AppState.userData = JSON.parse(savedData);
-            AppState.userData.stats.lastLogin = new Date().toISOString();
+            ({
+                // THREE.js элементы
+                scene: null,
+                camera: null,
+                renderer: null,
+
+                // Состояние VR
+                vrEnabled: false,
+
+                // Текущий режим
+                currentMode: null,
+
+                // Данные пользователя
+                userData: {
+                    username: '',
+                    avatar: '',
+                    theme: 'default',
+                    interests: [],
+                    achievements: [],
+                    stats: {
+                        timeSpent: 0, // В минутах
+                        lastLogin: null
+                    },
+                    activityHistory: [],
+                    friends: [],
+                    gamesPlayed: []
+                },
+
+                // 3D объекты на сцене
+                objects: [],
+
+                // Время начала сессии
+                sessionStartTime: null,
+
+                // WebSocket соединение
+                socket: null,
+
+                // Сообщения чата
+                chatMessages: []
+            }).userData = JSON.parse(savedData);
+            ({
+                // THREE.js элементы
+                scene: null,
+                camera: null,
+                renderer: null,
+
+                // Состояние VR
+                vrEnabled: false,
+
+                // Текущий режим
+                currentMode: null,
+
+                // Данные пользователя
+                userData: {
+                    username: '',
+                    avatar: '',
+                    theme: 'default',
+                    interests: [],
+                    achievements: [],
+                    stats: {
+                        timeSpent: 0, // В минутах
+                        lastLogin: null
+                    },
+                    activityHistory: [],
+                    friends: [],
+                    gamesPlayed: []
+                },
+
+                // 3D объекты на сцене
+                objects: [],
+
+                // Время начала сессии
+                sessionStartTime: null,
+
+                // WebSocket соединение
+                socket: null,
+
+                // Сообщения чата
+                chatMessages: []
+            }).userData.stats.lastLogin = new Date().toISOString();
             updateUI();
         } catch (error) {
             console.error('Ошибка загрузки данных:', error);
@@ -335,7 +1356,46 @@ function loadUserData() {
 
 // Сброс данных пользователя
 function resetUserData() {
-    AppState.userData = {
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData = {
         username: '',
         avatar: '',
         theme: 'default',
@@ -353,15 +1413,132 @@ function resetUserData() {
 
 // Сохранение данных пользователя
 function saveUserData() {
-    localStorage.setItem('metaverseUserData', JSON.stringify(AppState.userData));
+    localStorage.setItem('metaverseUserData', JSON.stringify(({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData));
 }
 
 // Обновление интерфейса
 function updateUI() {
     // 1. Имя пользователя
     const userInfoElement = document.getElementById('user-info');
-    if (AppState.userData.username) {
-        userInfoElement.textContent = AppState.userData.username;
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.username) {
+        userInfoElement.textContent = ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.username;
     } else {
         userInfoElement.textContent = 'Гость';
     }
@@ -371,7 +1548,46 @@ function updateUI() {
     
     // 3. Достижения
     document.getElementById('achievements-count').textContent = 
-        AppState.userData.achievements.length;
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.achievements.length;
     
     // 4. Время в метавселенной
     updateTimeSpentUI();
@@ -384,11 +1600,206 @@ function updateUI() {
 function updateAvatarUI() {
     const avatarElement = document.getElementById('avatar');
     
-    if (AppState.userData.avatar) {
-        avatarElement.innerHTML = `<img src="${AppState.userData.avatar}" alt="Аватар">`;
-    } else if (AppState.userData.username) {
-        avatarElement.textContent = AppState.userData.username.charAt(0).toUpperCase();
-        avatarElement.style.backgroundColor = stringToColor(AppState.userData.username);
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.avatar) {
+        avatarElement.innerHTML = `<img src="${({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.avatar}" alt="Аватар">`;
+    } else if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.username) {
+        avatarElement.textContent = ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.username.charAt(0).toUpperCase();
+        avatarElement.style.backgroundColor = stringToColor(({
+                // THREE.js элементы
+                scene: null,
+                camera: null,
+                renderer: null,
+
+                // Состояние VR
+                vrEnabled: false,
+
+                // Текущий режим
+                currentMode: null,
+
+                // Данные пользователя
+                userData: {
+                    username: '',
+                    avatar: '',
+                    theme: 'default',
+                    interests: [],
+                    achievements: [],
+                    stats: {
+                        timeSpent: 0, // В минутах
+                        lastLogin: null
+                    },
+                    activityHistory: [],
+                    friends: [],
+                    gamesPlayed: []
+                },
+
+                // 3D объекты на сцене
+                objects: [],
+
+                // Время начала сессии
+                sessionStartTime: null,
+
+                // WebSocket соединение
+                socket: null,
+
+                // Сообщения чата
+                chatMessages: []
+            }).userData.username);
     } else {
         avatarElement.textContent = '?';
         avatarElement.style.backgroundColor = '#4cc9f0';
@@ -408,15 +1819,132 @@ function stringToColor(str) {
 
 // Обновление времени в UI
 function updateTimeSpentUI() {
-    const hours = Math.floor(AppState.userData.stats.timeSpent / 60);
-    const minutes = AppState.userData.stats.timeSpent % 60;
+    const hours = Math.floor(({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.stats.timeSpent / 60);
+    const minutes = ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.stats.timeSpent % 60;
     document.getElementById('time-spent').textContent = 
         `${hours > 0 ? `${hours}h ` : ''}${minutes}m`;
 }
 
 // Обновление счетчика друзей онлайн
 function updateFriendsOnline() {
-    const onlineFriends = AppState.userData.friends.filter(friend => friend.status === 'онлайн');
+    const onlineFriends = ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.friends.filter(friend => friend.status === 'онлайн');
     document.getElementById('friends-online').textContent = onlineFriends.length;
 }
 
@@ -429,7 +1957,46 @@ function showUsernameModal() {
     const username = prompt('Добро пожаловать в метавселенную!\nКак вас зовут?', 'Гость');
     
     if (username !== null) {
-        AppState.userData.username = username || 'Гость';
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.username = username || 'Гость';
         saveUserData();
         updateUI();
         showAvatarModal();
@@ -445,7 +2012,76 @@ function showAvatarModal() {
     document.querySelectorAll('.avatar-option').forEach(option => {
         option.addEventListener('click', function() {
             const avatarIndex = parseInt(this.getAttribute('data-avatar')) - 1;
-            setAvatar(MetaverseConfig.avatarOptions[avatarIndex]);
+            setAvatar(({
+                    // Цветовые темы
+                    themes: {
+                        default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
+                        nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
+                        tech: { background: 0x0d47a1, primaryColor: '#3498db' },
+                        dark: { background: 0x111111, primaryColor: '#9b59b6' },
+                        light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
+                    },
+
+                    // Варианты аватаров
+                    avatarOptions: [
+                        'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
+                        'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
+                        'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
+                    ],
+
+                    // Настройки режимов
+                    modeSettings: {
+                        learn: {
+                            background: 0x1a237e,
+                            objects: ['book', 'laptop', 'blackboard'],
+                            description: 'Режим обучения и развития'
+                        },
+                        work: {
+                            background: 0x263238,
+                            objects: ['desk', 'computer', 'chart'],
+                            description: 'Рабочее пространство'
+                        },
+                        fun: {
+                            background: 0x4a148c,
+                            objects: ['gamepad', 'ball', 'dancefloor'],
+                            description: 'Зона развлечений'
+                        }
+                    },
+
+                    // Достижения
+                    achievements: {
+                        first_learn: {
+                            title: 'Любознательный',
+                            description: 'Впервые использовали режим обучения',
+                            icon: '📚'
+                        },
+                        all_modes: {
+                            title: 'Исследователь',
+                            description: 'Попробовали все режимы метавселенной',
+                            icon: '🌐'
+                        },
+                        vr_explorer: {
+                            title: 'VR Пионер',
+                            description: 'Впервые использовали VR режим',
+                            icon: '👓'
+                        },
+                        long_session: {
+                            title: 'Завсегдатай',
+                            description: 'Провели более 1 часа в метавселенной',
+                            icon: '⏳'
+                        },
+                        socializer: {
+                            title: 'Социальный',
+                            description: 'Добавили первого друга',
+                            icon: '👥'
+                        },
+                        gamer: {
+                            title: 'Игроман',
+                            description: 'Сыграли во все мини-игры',
+                            icon: '🎮'
+                        }
+                    }
+                }).avatarOptions[avatarIndex]);
         });
     });
     
@@ -477,7 +2113,46 @@ function setAvatar(url) {
     // Предварительная загрузка изображения
     const img = new Image();
     img.onload = () => {
-        AppState.userData.avatar = url;
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.avatar = url;
         saveUserData();
         updateAvatarUI();
         showNotification('Аватар успешно установлен!');
@@ -497,7 +2172,46 @@ function showFriendsModal() {
     const friendsList = document.getElementById('friends-list');
     friendsList.innerHTML = '';
     
-    AppState.userData.friends.forEach(friend => {
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.friends.forEach(friend => {
         const friendTemplate = document.getElementById('friend-template');
         const friendElement = friendTemplate.content.cloneNode(true);
         
@@ -541,13 +2255,91 @@ function addFriend() {
     }
     
     // Проверка на дубликат
-    if (AppState.userData.friends.some(f => f.name === friendName)) {
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.friends.some(f => f.name === friendName)) {
         showNotification('Этот друг уже добавлен');
         return;
     }
     
     // Добавление друга
-    AppState.userData.friends.push({
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.friends.push({
         name: friendName,
         status: Math.random() > 0.5 ? 'онлайн' : 'офлайн'
     });
@@ -558,7 +2350,46 @@ function addFriend() {
     friendNameInput.value = '';
     
     // Разблокировка достижения
-    if (AppState.userData.friends.length === 1) {
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.friends.length === 1) {
         unlockAchievement('socializer');
     }
 }
@@ -599,12 +2430,129 @@ function launchMiniGame(game) {
     }
     
     // Добавление в историю игр
-    if (!AppState.userData.gamesPlayed.includes(game)) {
-        AppState.userData.gamesPlayed.push(game);
+    if (!({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.gamesPlayed.includes(game)) {
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.gamesPlayed.push(game);
         saveUserData();
         
         // Проверка достижений
-        if (AppState.userData.gamesPlayed.length === 3) {
+        if (({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.gamesPlayed.length === 3) {
             unlockAchievement('gamer');
         }
     }
@@ -621,11 +2569,119 @@ function showAchievementsModal() {
     achievementsList.innerHTML = '';
     
     // Отображение всех достижений
-    Object.entries(MetaverseConfig.achievements).forEach(([id, achievement]) => {
+    Object.entries(({
+            // Цветовые темы
+            themes: {
+                default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
+                nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
+                tech: { background: 0x0d47a1, primaryColor: '#3498db' },
+                dark: { background: 0x111111, primaryColor: '#9b59b6' },
+                light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
+            },
+
+            // Варианты аватаров
+            avatarOptions: [
+                'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
+                'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
+                'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
+            ],
+
+            // Настройки режимов
+            modeSettings: {
+                learn: {
+                    background: 0x1a237e,
+                    objects: ['book', 'laptop', 'blackboard'],
+                    description: 'Режим обучения и развития'
+                },
+                work: {
+                    background: 0x263238,
+                    objects: ['desk', 'computer', 'chart'],
+                    description: 'Рабочее пространство'
+                },
+                fun: {
+                    background: 0x4a148c,
+                    objects: ['gamepad', 'ball', 'dancefloor'],
+                    description: 'Зона развлечений'
+                }
+            },
+
+            // Достижения
+            achievements: {
+                first_learn: {
+                    title: 'Любознательный',
+                    description: 'Впервые использовали режим обучения',
+                    icon: '📚'
+                },
+                all_modes: {
+                    title: 'Исследователь',
+                    description: 'Попробовали все режимы метавселенной',
+                    icon: '🌐'
+                },
+                vr_explorer: {
+                    title: 'VR Пионер',
+                    description: 'Впервые использовали VR режим',
+                    icon: '👓'
+                },
+                long_session: {
+                    title: 'Завсегдатай',
+                    description: 'Провели более 1 часа в метавселенной',
+                    icon: '⏳'
+                },
+                socializer: {
+                    title: 'Социальный',
+                    description: 'Добавили первого друга',
+                    icon: '👥'
+                },
+                gamer: {
+                    title: 'Игроман',
+                    description: 'Сыграли во все мини-игры',
+                    icon: '🎮'
+                }
+            }
+        }).achievements).forEach(([id, achievement]) => {
         const template = document.getElementById('achievement-template');
         const achievementElement = template.content.cloneNode(true);
         
-        const unlocked = AppState.userData.achievements.includes(id);
+        const unlocked = ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.achievements.includes(id);
         
         achievementElement.querySelector('.achievement-icon').textContent = 
             unlocked ? achievement.icon : '🔒';
@@ -674,8 +2730,86 @@ function showNotification(message) {
 
 // Приветственное уведомление
 function showWelcomeBackNotification() {
-    if (AppState.userData.username) {
-        showNotification(`С возвращением, ${AppState.userData.username}!`);
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.username) {
+        showNotification(`С возвращением, ${({
+                // THREE.js элементы
+                scene: null,
+                camera: null,
+                renderer: null,
+
+                // Состояние VR
+                vrEnabled: false,
+
+                // Текущий режим
+                currentMode: null,
+
+                // Данные пользователя
+                userData: {
+                    username: '',
+                    avatar: '',
+                    theme: 'default',
+                    interests: [],
+                    achievements: [],
+                    stats: {
+                        timeSpent: 0, // В минутах
+                        lastLogin: null
+                    },
+                    activityHistory: [],
+                    friends: [],
+                    gamesPlayed: []
+                },
+
+                // 3D объекты на сцене
+                objects: [],
+
+                // Время начала сессии
+                sessionStartTime: null,
+
+                // WebSocket соединение
+                socket: null,
+
+                // Сообщения чата
+                chatMessages: []
+            }).userData.username}!`);
     }
 }
 
@@ -685,9 +2819,156 @@ function showWelcomeBackNotification() {
 
 // Установка режима
 function setMode(mode) {
-    if (!MetaverseConfig.modeSettings[mode] || AppState.currentMode === mode) return;
+    if (!({
+        // Цветовые темы
+        themes: {
+            default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
+            nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
+            tech: { background: 0x0d47a1, primaryColor: '#3498db' },
+            dark: { background: 0x111111, primaryColor: '#9b59b6' },
+            light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
+        },
+
+        // Варианты аватаров
+        avatarOptions: [
+            'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
+            'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
+            'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
+        ],
+
+        // Настройки режимов
+        modeSettings: {
+            learn: {
+                background: 0x1a237e,
+                objects: ['book', 'laptop', 'blackboard'],
+                description: 'Режим обучения и развития'
+            },
+            work: {
+                background: 0x263238,
+                objects: ['desk', 'computer', 'chart'],
+                description: 'Рабочее пространство'
+            },
+            fun: {
+                background: 0x4a148c,
+                objects: ['gamepad', 'ball', 'dancefloor'],
+                description: 'Зона развлечений'
+            }
+        },
+
+        // Достижения
+        achievements: {
+            first_learn: {
+                title: 'Любознательный',
+                description: 'Впервые использовали режим обучения',
+                icon: '📚'
+            },
+            all_modes: {
+                title: 'Исследователь',
+                description: 'Попробовали все режимы метавселенной',
+                icon: '🌐'
+            },
+            vr_explorer: {
+                title: 'VR Пионер',
+                description: 'Впервые использовали VR режим',
+                icon: '👓'
+            },
+            long_session: {
+                title: 'Завсегдатай',
+                description: 'Провели более 1 часа в метавселенной',
+                icon: '⏳'
+            },
+            socializer: {
+                title: 'Социальный',
+                description: 'Добавили первого друга',
+                icon: '👥'
+            },
+            gamer: {
+                title: 'Игроман',
+                description: 'Сыграли во все мини-игры',
+                icon: '🎮'
+            }
+        }
+    }).modeSettings[mode] || ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).currentMode === mode) return;
     
-    AppState.currentMode = mode;
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).currentMode = mode;
     
     // 1. Обновляем сцену
     updateSceneForMode(mode);
@@ -699,16 +2980,193 @@ function setMode(mode) {
     checkAchievements();
     
     // 4. Показываем описание режима
-    showNotification(MetaverseConfig.modeSettings[mode].description);
+    showNotification(({
+            // Цветовые темы
+            themes: {
+                default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
+                nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
+                tech: { background: 0x0d47a1, primaryColor: '#3498db' },
+                dark: { background: 0x111111, primaryColor: '#9b59b6' },
+                light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
+            },
+
+            // Варианты аватаров
+            avatarOptions: [
+                'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
+                'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
+                'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
+            ],
+
+            // Настройки режимов
+            modeSettings: {
+                learn: {
+                    background: 0x1a237e,
+                    objects: ['book', 'laptop', 'blackboard'],
+                    description: 'Режим обучения и развития'
+                },
+                work: {
+                    background: 0x263238,
+                    objects: ['desk', 'computer', 'chart'],
+                    description: 'Рабочее пространство'
+                },
+                fun: {
+                    background: 0x4a148c,
+                    objects: ['gamepad', 'ball', 'dancefloor'],
+                    description: 'Зона развлечений'
+                }
+            },
+
+            // Достижения
+            achievements: {
+                first_learn: {
+                    title: 'Любознательный',
+                    description: 'Впервые использовали режим обучения',
+                    icon: '📚'
+                },
+                all_modes: {
+                    title: 'Исследователь',
+                    description: 'Попробовали все режимы метавселенной',
+                    icon: '🌐'
+                },
+                vr_explorer: {
+                    title: 'VR Пионер',
+                    description: 'Впервые использовали VR режим',
+                    icon: '👓'
+                },
+                long_session: {
+                    title: 'Завсегдатай',
+                    description: 'Провели более 1 часа в метавселенной',
+                    icon: '⏳'
+                },
+                socializer: {
+                    title: 'Социальный',
+                    description: 'Добавили первого друга',
+                    icon: '👥'
+                },
+                gamer: {
+                    title: 'Игроман',
+                    description: 'Сыграли во все мини-игры',
+                    icon: '🎮'
+                }
+            }
+        }).modeSettings[mode].description);
 }
 
 // Обновление сцены для режима
 function updateSceneForMode(mode) {
-    const modeConfig = MetaverseConfig.modeSettings[mode];
+    const modeConfig = ({
+        // Цветовые темы
+        themes: {
+            default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
+            nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
+            tech: { background: 0x0d47a1, primaryColor: '#3498db' },
+            dark: { background: 0x111111, primaryColor: '#9b59b6' },
+            light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
+        },
+
+        // Варианты аватаров
+        avatarOptions: [
+            'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
+            'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
+            'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
+        ],
+
+        // Настройки режимов
+        modeSettings: {
+            learn: {
+                background: 0x1a237e,
+                objects: ['book', 'laptop', 'blackboard'],
+                description: 'Режим обучения и развития'
+            },
+            work: {
+                background: 0x263238,
+                objects: ['desk', 'computer', 'chart'],
+                description: 'Рабочее пространство'
+            },
+            fun: {
+                background: 0x4a148c,
+                objects: ['gamepad', 'ball', 'dancefloor'],
+                description: 'Зона развлечений'
+            }
+        },
+
+        // Достижения
+        achievements: {
+            first_learn: {
+                title: 'Любознательный',
+                description: 'Впервые использовали режим обучения',
+                icon: '📚'
+            },
+            all_modes: {
+                title: 'Исследователь',
+                description: 'Попробовали все режимы метавселенной',
+                icon: '🌐'
+            },
+            vr_explorer: {
+                title: 'VR Пионер',
+                description: 'Впервые использовали VR режим',
+                icon: '👓'
+            },
+            long_session: {
+                title: 'Завсегдатай',
+                description: 'Провели более 1 часа в метавселенной',
+                icon: '⏳'
+            },
+            socializer: {
+                title: 'Социальный',
+                description: 'Добавили первого друга',
+                icon: '👥'
+            },
+            gamer: {
+                title: 'Игроман',
+                description: 'Сыграли во все мини-игры',
+                icon: '🎮'
+            }
+        }
+    }).modeSettings[mode];
     
     if (modeConfig) {
         // 1. Изменяем фон
-        AppState.scene.background = new THREE.Color(modeConfig.background);
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).scene.background = new THREE.Color(modeConfig.background);
         
         // 2. Обновляем освещение
         updateLightingForMode(mode);
@@ -720,7 +3178,46 @@ function updateSceneForMode(mode) {
 // Обновление освещения для режима
 function updateLightingForMode(mode) {
     // Здесь можно настроить разное освещение для разных режимов
-    const ambientLight = AppState.scene.children.find(child => 
+    const ambientLight = ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene.children.find(child => 
         child instanceof THREE.AmbientLight
     );
     
@@ -743,8 +3240,155 @@ function updateLightingForMode(mode) {
 
 // Обновление темы сцены
 function updateSceneTheme() {
-    const theme = MetaverseConfig.themes[AppState.userData.theme || 'default'];
-    AppState.scene.background = new THREE.Color(theme.background);
+    const theme = ({
+        // Цветовые темы
+        themes: {
+            default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
+            nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
+            tech: { background: 0x0d47a1, primaryColor: '#3498db' },
+            dark: { background: 0x111111, primaryColor: '#9b59b6' },
+            light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
+        },
+
+        // Варианты аватаров
+        avatarOptions: [
+            'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
+            'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
+            'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
+        ],
+
+        // Настройки режимов
+        modeSettings: {
+            learn: {
+                background: 0x1a237e,
+                objects: ['book', 'laptop', 'blackboard'],
+                description: 'Режим обучения и развития'
+            },
+            work: {
+                background: 0x263238,
+                objects: ['desk', 'computer', 'chart'],
+                description: 'Рабочее пространство'
+            },
+            fun: {
+                background: 0x4a148c,
+                objects: ['gamepad', 'ball', 'dancefloor'],
+                description: 'Зона развлечений'
+            }
+        },
+
+        // Достижения
+        achievements: {
+            first_learn: {
+                title: 'Любознательный',
+                description: 'Впервые использовали режим обучения',
+                icon: '📚'
+            },
+            all_modes: {
+                title: 'Исследователь',
+                description: 'Попробовали все режимы метавселенной',
+                icon: '🌐'
+            },
+            vr_explorer: {
+                title: 'VR Пионер',
+                description: 'Впервые использовали VR режим',
+                icon: '👓'
+            },
+            long_session: {
+                title: 'Завсегдатай',
+                description: 'Провели более 1 часа в метавселенной',
+                icon: '⏳'
+            },
+            socializer: {
+                title: 'Социальный',
+                description: 'Добавили первого друга',
+                icon: '👥'
+            },
+            gamer: {
+                title: 'Игроман',
+                description: 'Сыграли во все мини-игры',
+                icon: '🎮'
+            }
+        }
+    }).themes[({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.theme || 'default'];
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene.background = new THREE.Color(theme.background);
 }
 
 // ======================
@@ -753,7 +3397,46 @@ function updateSceneTheme() {
 
 // Переключение VR режима
 function toggleVR() {
-    if (!AppState.vrEnabled) {
+    if (!({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).vrEnabled) {
         enableVR();
     } else {
         disableVR();
@@ -787,12 +3470,129 @@ function enableVR() {
 
 // Настройка VR сессии
 function setupVRSession(session) {
-    AppState.vrEnabled = true;
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).vrEnabled = true;
     document.getElementById('vr-btn').textContent = 'Выйти из VR';
     
     // 1. Настройка рендерера для VR
-    AppState.renderer.xr.setSession(session);
-    AppState.renderer.xr.enabled = true;
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.xr.setSession(session);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.xr.enabled = true;
     
     // 2. Обработка окончания сессии
     session.addEventListener('end', disableVR);
@@ -807,13 +3607,169 @@ function setupVRSession(session) {
 
 // Выключение VR
 function disableVR() {
-    if (AppState.renderer.xr.getSession()) {
-        AppState.renderer.xr.getSession().end();
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.xr.getSession()) {
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).renderer.xr.getSession().end();
     }
     
-    AppState.vrEnabled = false;
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).vrEnabled = false;
     document.getElementById('vr-btn').textContent = 'VR';
-    AppState.renderer.xr.enabled = false;
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.xr.enabled = false;
 }
 
 // Настройка VR контроллеров
@@ -821,14 +3777,170 @@ function setupVRControllers() {
     const controllerModelFactory = new THREE.XRControllerModelFactory();
     
     for (let i = 0; i < 2; i++) {
-        const controller = AppState.renderer.xr.getController(i);
+        const controller = ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).renderer.xr.getController(i);
         controller.addEventListener('selectstart', onVRSelectStart);
         controller.addEventListener('selectend', onVRSelectEnd);
-        AppState.scene.add(controller);
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).scene.add(controller);
         
-        const controllerGrip = AppState.renderer.xr.getControllerGrip(i);
+        const controllerGrip = ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).renderer.xr.getControllerGrip(i);
         controllerGrip.add(controllerModelFactory.createControllerModel(controllerGrip));
-        AppState.scene.add(controllerGrip);
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).scene.add(controllerGrip);
     }
 }
 
@@ -859,7 +3971,46 @@ function getControllerIntersections(controller) {
     raycaster.ray.origin.setFromMatrixPosition(controller.matrixWorld);
     raycaster.ray.direction.set(0, 0, -1).applyMatrix4(tempMatrix);
     
-    return raycaster.intersectObjects(AppState.objects);
+    return raycaster.intersectObjects(({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).objects);
 }
 
 // ======================
@@ -868,7 +4019,46 @@ function getControllerIntersections(controller) {
 
 // Обработка кликов по объектам
 function onObjectClick(event) {
-    if (AppState.vrEnabled) return;
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).vrEnabled) return;
     
     const mouse = new THREE.Vector2(
         (event.clientX / window.innerWidth) * 2 - 1,
@@ -876,9 +4066,87 @@ function onObjectClick(event) {
     );
     
     const raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, AppState.camera);
+    raycaster.setFromCamera(mouse, ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).camera);
     
-    const intersections = raycaster.intersectObjects(AppState.objects);
+    const intersections = raycaster.intersectObjects(({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).objects);
     
     if (intersections.length > 0) {
         const object = intersections[0].object;
@@ -906,7 +4174,46 @@ function handleObjectInteraction(obj) {
             showNotification('Режим работы активирован');
             break;
         case 'welcome':
-            showNotification(`Привет, ${AppState.userData.username || 'друг'}!`);
+            showNotification(`Привет, ${({
+                    // THREE.js элементы
+                    scene: null,
+                    camera: null,
+                    renderer: null,
+
+                    // Состояние VR
+                    vrEnabled: false,
+
+                    // Текущий режим
+                    currentMode: null,
+
+                    // Данные пользователя
+                    userData: {
+                        username: '',
+                        avatar: '',
+                        theme: 'default',
+                        interests: [],
+                        achievements: [],
+                        stats: {
+                            timeSpent: 0, // В минутах
+                            lastLogin: null
+                        },
+                        activityHistory: [],
+                        friends: [],
+                        gamesPlayed: []
+                    },
+
+                    // 3D объекты на сцене
+                    objects: [],
+
+                    // Время начала сессии
+                    sessionStartTime: null,
+
+                    // WebSocket соединение
+                    socket: null,
+
+                    // Сообщения чата
+                    chatMessages: []
+                }).userData.username || 'друг'}!`);
             break;
         default:
             showNotification(`Вы взаимодействуете с ${obj.userData.name || 'объектом'}`);
@@ -919,14 +4226,131 @@ function handleObjectInteraction(obj) {
 
 // Запись активности
 function recordActivity(mode) {
-    AppState.userData.activityHistory.push({
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.activityHistory.push({
         mode,
         timestamp: new Date().toISOString()
     });
     
     // Ограничиваем историю 100 последними записями
-    if (AppState.userData.activityHistory.length > 100) {
-        AppState.userData.activityHistory.shift();
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.activityHistory.length > 100) {
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.activityHistory.shift();
     }
     
     saveUserData();
@@ -935,40 +4359,598 @@ function recordActivity(mode) {
 // Проверка достижений
 function checkAchievements() {
     // 1. Проверка первого использования режима обучения
-    if (!AppState.userData.achievements.includes('first_learn') && 
-        AppState.userData.activityHistory.some(a => a.mode === 'learn')) {
+    if (!({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.achievements.includes('first_learn') && 
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.activityHistory.some(a => a.mode === 'learn')) {
         unlockAchievement('first_learn');
     }
     
     // 2. Проверка использования всех режимов
-    const modes = Object.keys(MetaverseConfig.modeSettings);
+    const modes = Object.keys(({
+            // Цветовые темы
+            themes: {
+                default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
+                nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
+                tech: { background: 0x0d47a1, primaryColor: '#3498db' },
+                dark: { background: 0x111111, primaryColor: '#9b59b6' },
+                light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
+            },
+
+            // Варианты аватаров
+            avatarOptions: [
+                'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
+                'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
+                'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
+            ],
+
+            // Настройки режимов
+            modeSettings: {
+                learn: {
+                    background: 0x1a237e,
+                    objects: ['book', 'laptop', 'blackboard'],
+                    description: 'Режим обучения и развития'
+                },
+                work: {
+                    background: 0x263238,
+                    objects: ['desk', 'computer', 'chart'],
+                    description: 'Рабочее пространство'
+                },
+                fun: {
+                    background: 0x4a148c,
+                    objects: ['gamepad', 'ball', 'dancefloor'],
+                    description: 'Зона развлечений'
+                }
+            },
+
+            // Достижения
+            achievements: {
+                first_learn: {
+                    title: 'Любознательный',
+                    description: 'Впервые использовали режим обучения',
+                    icon: '📚'
+                },
+                all_modes: {
+                    title: 'Исследователь',
+                    description: 'Попробовали все режимы метавселенной',
+                    icon: '🌐'
+                },
+                vr_explorer: {
+                    title: 'VR Пионер',
+                    description: 'Впервые использовали VR режим',
+                    icon: '👓'
+                },
+                long_session: {
+                    title: 'Завсегдатай',
+                    description: 'Провели более 1 часа в метавселенной',
+                    icon: '⏳'
+                },
+                socializer: {
+                    title: 'Социальный',
+                    description: 'Добавили первого друга',
+                    icon: '👥'
+                },
+                gamer: {
+                    title: 'Игроман',
+                    description: 'Сыграли во все мини-игры',
+                    icon: '🎮'
+                }
+            }
+        }).modeSettings);
     const allModesUsed = modes.every(mode => 
-        AppState.userData.activityHistory.some(a => a.mode === mode)
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.activityHistory.some(a => a.mode === mode)
     );
     
-    if (allModesUsed && !AppState.userData.achievements.includes('all_modes')) {
+    if (allModesUsed && !({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.achievements.includes('all_modes')) {
         unlockAchievement('all_modes');
     }
     
     // 3. Проверка времени в сессии
-    if (AppState.userData.stats.timeSpent >= 60 && 
-        !AppState.userData.achievements.includes('long_session')) {
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.stats.timeSpent >= 60 && 
+        !({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.achievements.includes('long_session')) {
         unlockAchievement('long_session');
     }
 }
 
 // Разблокировка достижения
 function unlockAchievement(id) {
-    if (!MetaverseConfig.achievements[id] || 
-        AppState.userData.achievements.includes(id)) {
+    if (!({
+        // Цветовые темы
+        themes: {
+            default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
+            nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
+            tech: { background: 0x0d47a1, primaryColor: '#3498db' },
+            dark: { background: 0x111111, primaryColor: '#9b59b6' },
+            light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
+        },
+
+        // Варианты аватаров
+        avatarOptions: [
+            'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
+            'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
+            'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
+        ],
+
+        // Настройки режимов
+        modeSettings: {
+            learn: {
+                background: 0x1a237e,
+                objects: ['book', 'laptop', 'blackboard'],
+                description: 'Режим обучения и развития'
+            },
+            work: {
+                background: 0x263238,
+                objects: ['desk', 'computer', 'chart'],
+                description: 'Рабочее пространство'
+            },
+            fun: {
+                background: 0x4a148c,
+                objects: ['gamepad', 'ball', 'dancefloor'],
+                description: 'Зона развлечений'
+            }
+        },
+
+        // Достижения
+        achievements: {
+            first_learn: {
+                title: 'Любознательный',
+                description: 'Впервые использовали режим обучения',
+                icon: '📚'
+            },
+            all_modes: {
+                title: 'Исследователь',
+                description: 'Попробовали все режимы метавселенной',
+                icon: '🌐'
+            },
+            vr_explorer: {
+                title: 'VR Пионер',
+                description: 'Впервые использовали VR режим',
+                icon: '👓'
+            },
+            long_session: {
+                title: 'Завсегдатай',
+                description: 'Провели более 1 часа в метавселенной',
+                icon: '⏳'
+            },
+            socializer: {
+                title: 'Социальный',
+                description: 'Добавили первого друга',
+                icon: '👥'
+            },
+            gamer: {
+                title: 'Игроман',
+                description: 'Сыграли во все мини-игры',
+                icon: '🎮'
+            }
+        }
+    }).achievements[id] || 
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.achievements.includes(id)) {
         return;
     }
     
-    AppState.userData.achievements.push(id);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).userData.achievements.push(id);
     document.getElementById('achievements-count').textContent = 
-        AppState.userData.achievements.length;
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.achievements.length;
     
-    const achievement = MetaverseConfig.achievements[id];
+    const achievement = ({
+        // Цветовые темы
+        themes: {
+            default: { background: 0x1a1a2e, primaryColor: '#4cc9f0' },
+            nature: { background: 0x1b5e20, primaryColor: '#2ecc71' },
+            tech: { background: 0x0d47a1, primaryColor: '#3498db' },
+            dark: { background: 0x111111, primaryColor: '#9b59b6' },
+            light: { background: 0xf5f5f5, primaryColor: '#2980b9' }
+        },
+
+        // Варианты аватаров
+        avatarOptions: [
+            'https://cdn-icons-png.flaticon.com/512/4333/4333609.png',
+            'https://cdn-icons-png.flaticon.com/512/3667/3667325.png',
+            'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'
+        ],
+
+        // Настройки режимов
+        modeSettings: {
+            learn: {
+                background: 0x1a237e,
+                objects: ['book', 'laptop', 'blackboard'],
+                description: 'Режим обучения и развития'
+            },
+            work: {
+                background: 0x263238,
+                objects: ['desk', 'computer', 'chart'],
+                description: 'Рабочее пространство'
+            },
+            fun: {
+                background: 0x4a148c,
+                objects: ['gamepad', 'ball', 'dancefloor'],
+                description: 'Зона развлечений'
+            }
+        },
+
+        // Достижения
+        achievements: {
+            first_learn: {
+                title: 'Любознательный',
+                description: 'Впервые использовали режим обучения',
+                icon: '📚'
+            },
+            all_modes: {
+                title: 'Исследователь',
+                description: 'Попробовали все режимы метавселенной',
+                icon: '🌐'
+            },
+            vr_explorer: {
+                title: 'VR Пионер',
+                description: 'Впервые использовали VR режим',
+                icon: '👓'
+            },
+            long_session: {
+                title: 'Завсегдатай',
+                description: 'Провели более 1 часа в метавселенной',
+                icon: '⏳'
+            },
+            socializer: {
+                title: 'Социальный',
+                description: 'Добавили первого друга',
+                icon: '👥'
+            },
+            gamer: {
+                title: 'Игроман',
+                description: 'Сыграли во все мини-игры',
+                icon: '🎮'
+            }
+        }
+    }).achievements[id];
     showNotification(
         `${achievement.icon || '🏆'} Достижение: ${achievement.title}\n${achievement.description}`
     );
@@ -989,17 +4971,173 @@ function sendChatMessage() {
     
     // Создание объекта сообщения
     const newMessage = {
-        sender: AppState.userData.username || 'Гость',
+        sender: ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.username || 'Гость',
         text: message,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
     
     // Добавление в историю
-    AppState.chatMessages.push(newMessage);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).chatMessages.push(newMessage);
     
     // Ограничение истории
-    if (AppState.chatMessages.length > 100) {
-        AppState.chatMessages.shift();
+    if (({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).chatMessages.length > 100) {
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).chatMessages.shift();
     }
     
     // Обновление UI
@@ -1014,7 +5152,46 @@ function updateChatUI() {
     const chatMessagesContainer = document.getElementById('chat-messages');
     chatMessagesContainer.innerHTML = '';
     
-    AppState.chatMessages.forEach(message => {
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).chatMessages.forEach(message => {
         const template = document.getElementById('message-template');
         const messageElement = template.content.cloneNode(true);
         
@@ -1040,15 +5217,171 @@ function updateChatUI() {
 
 // Запуск таймера сессии
 function startSessionTimer() {
-    AppState.sessionStartTime = new Date();
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).sessionStartTime = new Date();
     
     // Обновляем каждую минуту
-    AppState.sessionTimer = setInterval(() => {
-        AppState.userData.stats.timeSpent += 1;
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).sessionTimer = setInterval(() => {
+        ({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.stats.timeSpent += 1;
         updateTimeSpentUI();
         
         // Автосохранение каждые 10 минут
-        if (AppState.userData.stats.timeSpent % 10 === 0) {
+        if (({
+            // THREE.js элементы
+            scene: null,
+            camera: null,
+            renderer: null,
+
+            // Состояние VR
+            vrEnabled: false,
+
+            // Текущий режим
+            currentMode: null,
+
+            // Данные пользователя
+            userData: {
+                username: '',
+                avatar: '',
+                theme: 'default',
+                interests: [],
+                achievements: [],
+                stats: {
+                    timeSpent: 0, // В минутах
+                    lastLogin: null
+                },
+                activityHistory: [],
+                friends: [],
+                gamesPlayed: []
+            },
+
+            // 3D объекты на сцене
+            objects: [],
+
+            // Время начала сессии
+            sessionStartTime: null,
+
+            // WebSocket соединение
+            socket: null,
+
+            // Сообщения чата
+            chatMessages: []
+        }).userData.stats.timeSpent % 10 === 0) {
             saveUserData();
         }
         
@@ -1105,7 +5438,574 @@ function setupEventListeners() {
     
     // 9. Обработка выхода
     window.addEventListener('beforeunload', () => {
-        clearInterval(AppState.sessionTimer);
+        clearInterval(({
+                // THREE.js элементы
+                scene: null,
+                camera: null,
+                renderer: null,
+
+                // Состояние VR
+                vrEnabled: false,
+
+                // Текущий режим
+                currentMode: null,
+
+                // Данные пользователя
+                userData: {
+                    username: '',
+                    avatar: '',
+                    theme: 'default',
+                    interests: [],
+                    achievements: [],
+                    stats: {
+                        timeSpent: 0, // В минутах
+                        lastLogin: null
+                    },
+                    activityHistory: [],
+                    friends: [],
+                    gamesPlayed: []
+                },
+
+                // 3D объекты на сцене
+                objects: [],
+
+                // Время начала сессии
+                sessionStartTime: null,
+
+                // WebSocket соединение
+                socket: null,
+
+                // Сообщения чата
+                chatMessages: []
+            }).sessionTimer);
         saveUserData();
     });
 }
+// Расширенная конфигурация
+const MetaverseConfig = {
+    // Добавлены новые настройки
+    xpPerMinute: 1,
+    currencyPerMinute: 0.5,
+    levelMultiplier: 1.2,
+    
+    // Добавлены предметы для магазина
+    shopItems: [
+        { id: 'avatar1', name: 'Эксклюзивный аватар', price: 50 },
+        { id: 'theme1', name: 'Тёмная тема', price: 30 },
+        { id: 'effect1', name: 'Эффект частиц', price: 70 }
+    ]
+};
+
+// Обновлённое состояние приложения
+const AppState = {
+    // Добавлены новые свойства
+    playerPosition: { x: 0, y: 0, z: 0 },
+    inventory: [],
+    settings: {
+        volume: 50,
+        controls: 'standard'
+    },
+    
+    // Остальные свойства остаются
+};
+
+// Новые функции
+function updateMiniMap() {
+    const miniMap = document.getElementById('mini-map');
+    const playerDot = document.createElement('div');
+    playerDot.className = 'player-dot';
+    playerDot.style.left = `${50 + ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).playerPosition.x * 10}%`;
+    playerDot.style.top = `${50 + ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).playerPosition.z * 10}%`;
+    miniMap.innerHTML = '';
+    miniMap.appendChild(playerDot);
+}
+
+function handleMovement() {
+    document.addEventListener('keydown', (e) => {
+        const speed = 0.1;
+        switch(e.key) {
+            case 'w': ({
+                // THREE.js элементы
+                scene: null,
+                camera: null,
+                renderer: null,
+
+                // Состояние VR
+                vrEnabled: false,
+
+                // Текущий режим
+                currentMode: null,
+
+                // Данные пользователя
+                userData: {
+                    username: '',
+                    avatar: '',
+                    theme: 'default',
+                    interests: [],
+                    achievements: [],
+                    stats: {
+                        timeSpent: 0, // В минутах
+                        lastLogin: null
+                    },
+                    activityHistory: [],
+                    friends: [],
+                    gamesPlayed: []
+                },
+
+                // 3D объекты на сцене
+                objects: [],
+
+                // Время начала сессии
+                sessionStartTime: null,
+
+                // WebSocket соединение
+                socket: null,
+
+                // Сообщения чата
+                chatMessages: []
+            }).playerPosition.z -= speed; break;
+            case 's': ({
+                // THREE.js элементы
+                scene: null,
+                camera: null,
+                renderer: null,
+
+                // Состояние VR
+                vrEnabled: false,
+
+                // Текущий режим
+                currentMode: null,
+
+                // Данные пользователя
+                userData: {
+                    username: '',
+                    avatar: '',
+                    theme: 'default',
+                    interests: [],
+                    achievements: [],
+                    stats: {
+                        timeSpent: 0, // В минутах
+                        lastLogin: null
+                    },
+                    activityHistory: [],
+                    friends: [],
+                    gamesPlayed: []
+                },
+
+                // 3D объекты на сцене
+                objects: [],
+
+                // Время начала сессии
+                sessionStartTime: null,
+
+                // WebSocket соединение
+                socket: null,
+
+                // Сообщения чата
+                chatMessages: []
+            }).playerPosition.z += speed; break;
+            case 'a': ({
+                // THREE.js элементы
+                scene: null,
+                camera: null,
+                renderer: null,
+
+                // Состояние VR
+                vrEnabled: false,
+
+                // Текущий режим
+                currentMode: null,
+
+                // Данные пользователя
+                userData: {
+                    username: '',
+                    avatar: '',
+                    theme: 'default',
+                    interests: [],
+                    achievements: [],
+                    stats: {
+                        timeSpent: 0, // В минутах
+                        lastLogin: null
+                    },
+                    activityHistory: [],
+                    friends: [],
+                    gamesPlayed: []
+                },
+
+                // 3D объекты на сцене
+                objects: [],
+
+                // Время начала сессии
+                sessionStartTime: null,
+
+                // WebSocket соединение
+                socket: null,
+
+                // Сообщения чата
+                chatMessages: []
+            }).playerPosition.x -= speed; break;
+            case 'd': ({
+                // THREE.js элементы
+                scene: null,
+                camera: null,
+                renderer: null,
+
+                // Состояние VR
+                vrEnabled: false,
+
+                // Текущий режим
+                currentMode: null,
+
+                // Данные пользователя
+                userData: {
+                    username: '',
+                    avatar: '',
+                    theme: 'default',
+                    interests: [],
+                    achievements: [],
+                    stats: {
+                        timeSpent: 0, // В минутах
+                        lastLogin: null
+                    },
+                    activityHistory: [],
+                    friends: [],
+                    gamesPlayed: []
+                },
+
+                // 3D объекты на сцене
+                objects: [],
+
+                // Время начала сессии
+                sessionStartTime: null,
+
+                // WebSocket соединение
+                socket: null,
+
+                // Сообщения чата
+                chatMessages: []
+            }).playerPosition.x += speed; break;
+        }
+        updateMiniMap();
+    });
+}
+
+// Обновлённая функция инициализации
+function initApp() {
+    // Добавлены новые инициализации
+    initSounds();
+    handleMovement();
+    initShop();
+    
+    // Остальная инициализация
+    loadUserData();
+    showLoadingScreen(() => {
+        init3DScene();
+        setupEventListeners();
+        startSessionTimer();
+        updateMiniMap();
+    });
+}
+
+// Новые обработчики событий
+function setupEventListeners() {
+    // Добавлены новые обработчики
+    document.getElementById('settings-btn').addEventListener('click', showSettingsModal);
+    document.getElementById('ar-btn').addEventListener('click', enableAR);
+    
+    // Остальные обработчики
+}
+
+// AR реализация
+async function enableAR() {
+    try {
+        const session = await navigator.xr.requestSession('immersive-ar');
+        setupARSession(session);
+    } catch (err) {
+        showNotification('AR не поддерживается: ' + err.message);
+    }
+}
+
+function setupARSession(session) {
+    // Настройка AR сцены
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.xr.setReferenceSpaceType('local');
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).renderer.xr.setSession(session);
+    
+    // Добавление AR объектов
+    const arObject = new THREE.Mesh(
+        new THREE.BoxGeometry(0.1, 0.1, 0.1),
+        new THREE.MeshBasicMaterial({ color: 0xff0000 })
+    );
+    arObject.position.set(0, 0, -0.5);
+    ({
+        // THREE.js элементы
+        scene: null,
+        camera: null,
+        renderer: null,
+
+        // Состояние VR
+        vrEnabled: false,
+
+        // Текущий режим
+        currentMode: null,
+
+        // Данные пользователя
+        userData: {
+            username: '',
+            avatar: '',
+            theme: 'default',
+            interests: [],
+            achievements: [],
+            stats: {
+                timeSpent: 0, // В минутах
+                lastLogin: null
+            },
+            activityHistory: [],
+            friends: [],
+            gamesPlayed: []
+        },
+
+        // 3D объекты на сцене
+        objects: [],
+
+        // Время начала сессии
+        sessionStartTime: null,
+
+        // WebSocket соединение
+        socket: null,
+
+        // Сообщения чата
+        chatMessages: []
+    }).scene.add(arObject);
+    
+    showNotification('AR режим активирован!');
+}
+function createStarfield() {
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.1,
+        transparent: true
+    });
+
+    const starsVertices = [];
+    for (let i = 0; i < 5000; i++) {
+        starsVertices.push(
+            THREE.MathUtils.randFloatSpread(2000),
+            THREE.MathUtils.randFloatSpread(2000),
+            THREE.MathUtils.randFloatSpread(2000)
+        );
+    }
+
+    starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+    const starField = new THREE.Points(starsGeometry, starsMaterial);
+    AppState.scene.add(starField);
+}
+function createParticles() {
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCnt = 1000;
+    
+    const posArray = new Float32Array(particlesCnt * 3);
+    for(let i = 0; i < particlesCnt * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 10;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.02,
+        color: 0x4cc9f0,
+        transparent: true,
+        opacity: 0.8
+    });
+    
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    AppState.scene.add(particlesMesh);
+}
+new THREE.RGBELoader()
+    .load('path/to/your.hdr', function(texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        AppState.scene.background = texture;
+        AppState.scene.environment = texture;
+    });
+    const bgShader = {
+    uniforms: {},
+    vertexShader: `
+        void main() {
+            gl_Position = vec4(position, 1.0);
+        }
+    `,
+    fragmentShader: `
+        uniform float time;
+        void main() {
+            vec2 uv = gl_FragCoord.xy / resolution.xy;
+            vec3 col = 0.5 + 0.5*cos(time+uv.xyx+vec3(0,2,4));
+            gl_FragColor = vec4(col, 1.0);
+        }
+    `
+};
+if (AppState.scene.background.isColor) {
+    AppState.scene.background.offset.y += 0.0001;
+}
+const bgMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.ShaderMaterial(bgShader)
+);
+AppState.scene.add(bgMesh);
+import { Galaxy } from 'three-galaxy';
+const galaxy = new Galaxy(AppState.scene);
+background: radial-gradient
