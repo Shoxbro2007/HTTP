@@ -7,9 +7,9 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden;
+    overflow: hidden; /* Скрываем полосы прокрутки */
     color: #ffffff;
-    background-color: #1a1a2e;
+    background-color: #1a1a2e; /* Темный фон по умолчанию */
 }
 
 /* Экран загрузки */
@@ -19,22 +19,22 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    background: linear-gradient(135deg, #1a1a2e, #16213e); /* Градиентный фон */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-    transition: opacity 1s ease-out;
+    z-index: 1000; /* Поверх всех элементов */
+    transition: opacity 1s ease-out; /* Плавное исчезновение */
 }
 
 .loader {
-    border: 5px solid rgba(255, 255, 255, 0.2);
-    border-top: 5px solid #4cc9f0;
-    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.2); /* Светлая рамка */
+    border-top: 5px solid var(--primary-color); /* Цветная верхняя часть */
+    border-radius: 50%; /* Круглая форма */
     width: 60px;
     height: 60px;
-    animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite; /* Анимация вращения */
     margin-bottom: 20px;
 }
 
@@ -46,7 +46,7 @@ body {
 #loading-screen p {
     font-size: 1.2rem;
     color: #ffffff;
-    text-shadow: 0 0 10px rgba(76, 201, 240, 0.7);
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.7); /* Свечение текста */
 }
 
 #loading-progress {
@@ -61,18 +61,18 @@ body {
 #loading-bar {
     height: 100%;
     width: 0;
-    background: #4cc9f0;
+    background: var(--primary-color);
     transition: width 0.3s ease;
 }
 
-/* Контейнер метавселенной */
+/* Контейнер метавселенной (для 3D-сцены) */
 #metaverse-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 1; /* Под UI-элементами */
 }
 
 /* Основной контейнер интерфейса */
@@ -82,11 +82,11 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    pointer-events: none; /* Позволяет кликать сквозь него на 3D-сцену */
     z-index: 100;
 }
 
-/* Элементы с возможностью взаимодействия */
+/* Элементы с возможностью взаимодействия (для pointer-events: none на родителе) */
 .clickable {
     pointer-events: auto;
     cursor: pointer;
@@ -99,7 +99,7 @@ body {
     right: 20px;
     display: flex;
     gap: 10px;
-    pointer-events: auto;
+    pointer-events: auto; /* Взаимодействие включено */
 }
 
 .mode-btn {
@@ -110,16 +110,16 @@ body {
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px); /* Эффект размытия фона */
     transition: all 0.3s;
 }
 
 .mode-btn.active {
-    background: #4cc9f0;
+    background: var(--primary-color); /* Активная кнопка подсвечивается */
 }
 
 .mode-btn:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Небольшой подъем при наведении */
     background: rgba(76, 201, 240, 0.7);
 }
 
@@ -147,7 +147,7 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: #4cc9f0;
+    background: var(--primary-color);
     margin-right: 15px;
     overflow: hidden;
     display: flex;
@@ -173,6 +173,43 @@ body {
 #user-info {
     font-size: 1rem;
     font-weight: 600;
+}
+
+.username {
+    display: block;
+    font-size: 1.1em;
+    color: white;
+}
+
+.level {
+    display: block;
+    font-size: 0.9em;
+    color: var(--primary-color);
+}
+
+/* Полоса опыта */
+.experience-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    margin: 10px 0;
+}
+
+.experience-bar .progress {
+    height: 100%;
+    width: 0%; /* Будет меняться JS */
+    background: linear-gradient(90deg, #f72585, #b5179e); /* Градиент опыта */
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+/* Валюта */
+.currency {
+    font-size: 0.9rem;
+    color: #ffd700; /* Золотой цвет */
+    text-align: right;
+    margin-bottom: 15px;
 }
 
 /* Кнопки действий */
@@ -219,7 +256,7 @@ body {
 }
 
 .stat:hover {
-    color: #4cc9f0;
+    color: var(--primary-color);
 }
 
 /* Уведомления */
@@ -232,7 +269,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    pointer-events: none;
+    pointer-events: none; /* Чтобы не мешали кликам, пока не появятся */
 }
 
 .notification {
@@ -242,16 +279,16 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 300px;
-    opacity: 0;
-    transform: translateY(-100px) translateX(-50%);
-    transition: all 0.5s ease;
-    pointer-events: auto;
+    opacity: 0; /* Изначально скрыто */
+    transform: translateY(-100px) translateX(-50%); /* Сдвинуто вверх */
+    transition: all 0.5s ease; /* Плавное появление/исчезновение */
+    pointer-events: auto; /* Взаимодействие включено */
     text-align: center;
 }
 
 .notification.show {
     opacity: 1;
-    transform: translateY(0) translateX(-50%);
+    transform: translateY(0) translateX(-50%); /* Появляется на месте */
 }
 
 /* Чат */
@@ -270,9 +307,34 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Вкладки чата */
+.chat-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.chat-tabs button {
+    flex: 1;
+    padding: 10px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.chat-tabs button.active {
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: bold;
+}
+
+.chat-tabs button:hover {
+    background: rgba(255,255,255,0.05);
+}
+
 #chat-messages {
     flex-grow: 1;
-    overflow-y: auto;
+    overflow-y: auto; /* Прокрутка сообщений */
     padding: 15px;
     max-height: 300px;
     display: flex;
@@ -299,7 +361,7 @@ body {
 #send-btn {
     margin-left: 5px;
     padding: 0 15px;
-    background: #4cc9f0;
+    background: var(--primary-color);
     border: none;
     border-radius: 5px;
     color: white;
@@ -308,26 +370,26 @@ body {
 }
 
 #send-btn:hover {
-    background: #4895ef;
+    background: var(--secondary-color);
 }
 
-/* Модальные окна */
+/* Модальные окна (общие стили) */
 .modal {
-    display: none;
+    display: none; /* Изначально скрыты */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.8); /* Полупрозрачный черный фон */
     z-index: 1000;
     justify-content: center;
     align-items: center;
-    pointer-events: auto;
+    pointer-events: auto; /* Взаимодействие включено */
 }
 
 .modal-content {
-    background: #1a1a2e;
+    background: var(--bg-dark);
     padding: 30px;
     border-radius: 15px;
     max-width: 500px;
@@ -338,7 +400,7 @@ body {
 
 .modal h2 {
     margin-bottom: 20px;
-    color: #4cc9f0;
+    color: var(--primary-color);
 }
 
 /* Аватар модальное окно */
@@ -356,7 +418,7 @@ body {
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s;
-    border: 3px solid transparent;
+    border: 3px solid transparent; /* Прозрачная рамка */
     overflow: hidden;
     pointer-events: auto;
 }
@@ -369,7 +431,7 @@ body {
 
 .avatar-option:hover {
     transform: scale(1.1);
-    border-color: #4cc9f0;
+    border-color: var(--primary-color); /* Рамка при наведении */
 }
 
 .custom-avatar {
@@ -389,7 +451,7 @@ body {
 
 .modal button {
     padding: 10px 20px;
-    background: #4cc9f0;
+    background: var(--primary-color);
     color: white;
     border: none;
     border-radius: 5px;
@@ -399,7 +461,7 @@ body {
 }
 
 .modal button:hover {
-    background: #4895ef;
+    background: var(--secondary-color);
 }
 
 /* Друзья */
@@ -425,7 +487,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #4cc9f0;
+    background: var(--primary-color);
     margin-right: 10px;
     display: flex;
     align-items: center;
@@ -447,7 +509,7 @@ body {
 .friend-status {
     display: block;
     font-size: 0.8em;
-    color: #4cc9f0;
+    color: var(--primary-color);
 }
 
 .chat-with-friend {
@@ -479,7 +541,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #4cc9f0;
+    background: var(--primary-color);
     margin-right: 10px;
     display: flex;
     align-items: center;
@@ -517,15 +579,15 @@ body {
     word-break: break-word;
 }
 
-/* Игры */
-.games-grid {
+/* Игры и Магазин (сетка карточек) */
+.games-grid, #shop-items-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 15px;
     margin: 20px 0;
 }
 
-.game-card {
+.game-card, .shop-item-card {
     background: rgba(76, 201, 240, 0.2);
     padding: 15px;
     border-radius: 10px;
@@ -533,19 +595,24 @@ body {
     transition: all 0.3s;
 }
 
-.game-card:hover {
+.game-card:hover, .shop-item-card:hover {
     background: rgba(76, 201, 240, 0.4);
     transform: translateY(-3px);
 }
 
-.game-card h3 {
+.game-card h3, .shop-item-card h3 {
     margin-bottom: 5px;
-    color: #4cc9f0;
+    color: var(--primary-color);
 }
 
-.game-card p {
+.game-card p, .shop-item-card p {
     font-size: 0.9em;
     color: rgba(255, 255, 255, 0.7);
+}
+
+.shop-item-card .buy-item-btn {
+    margin-top: 10px;
+    width: 100%;
 }
 
 /* Достижения */
@@ -606,15 +673,69 @@ body {
     height: auto;
 }
 
-/* Адаптивность */
+/* Мини-карта */
+#mini-map {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 150px;
+    height: 150px;
+    background: rgba(30, 30, 50, 0.7);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    overflow: hidden;
+    pointer-events: auto; /* Взаимодействие включено */
+}
+
+.player-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f00; /* Красная точка для игрока */
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Центрирование точки */
+    border: 1px solid white;
+}
+
+/* Новые базовые стили (переменные) */
+:root {
+    --primary-color: #4cc9f0; /* Основной цвет (голубой) */
+    --secondary-color: #4895ef; /* Вторичный цвет (синий) */
+    --bg-dark: #1a1a2e; /* Темный фон */
+    --bg-darker: #16213e; /* Еще более темный фон */
+}
+
+/* Анимация появления элементов UI */
+#user-panel,
+#chat-panel,
+#mode-panel,
+#mini-map {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     #user-panel, #chat-panel {
-        width: calc(100% - 40px);
+        width: calc(100% - 40px); /* Ширина с отступами */
+        left: 20px;
+        right: 20px;
+        bottom: 10px;
     }
     
     #mode-panel {
         top: 10px;
         right: 10px;
+        gap: 5px;
+    }
+
+    .mode-btn {
+        padding: 8px 10px;
+        font-size: 0.8em;
     }
     
     .avatar-options {
@@ -627,14 +748,7 @@ body {
     }
     
     #chat-panel {
-        right: 20px;
-        width: calc(100% - 40px);
-        max-height: 300px;
-    }
-    
-    #user-panel {
-        bottom: 10px;
-        left: 10px;
+        max-height: 250px; /* Меньшая высота чата */
     }
     
     #action-buttons {
@@ -645,96 +759,53 @@ body {
         padding: 6px 8px;
         font-size: 12px;
     }
-}
 
-/* Анимации */
-#user-panel,
-#chat-panel,
-#mode-panel {
-    animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-/* Новые базовые стили */
-:root {
-    --primary-color: #4cc9f0;
-    --secondary-color: #4895ef;
-    --bg-dark: #1a1a2e;
-    --bg-darker: #16213e;
-}
-
-/* Анимация загрузки */
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
-}
-
-/* Мини-карта */
-#mini-map {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 150px;
-    height: 150px;
-    background: rgba(30, 30, 50, 0.7);
-    border: 2px solid var(--primary-color);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-/* Полоса опыта */
-.experience-bar {
-    width: 100%;
-    height: 6px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 3px;
-    margin: 10px 0;
-}
-
-.experience-bar .progress {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #f72585, #b5179e);
-    border-radius: 3px;
-    transition: width 0.3s;
-}
-
-/* Вкладки чата */
-.chat-tabs {
-    display: flex;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.chat-tabs button {
-    flex: 1;
-    padding: 10px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-.chat-tabs button.active {
-    border-bottom: 2px solid var(--primary-color);
-}
-
-/* Адаптивные улучшения */
-@media (max-width: 768px) {
-    #user-panel, #chat-panel {
-        width: 95%;
-        left: 2.5%;
-        right: 2.5%;
-    }
-    
     #mini-map {
         width: 100px;
         height: 100px;
+        top: 10px;
+        left: 10px;
+    }
+
+    .modal-content {
+        padding: 20px;
     }
 }
-body {
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+
+/* Стили для модальных окон инвентаря и магазина */
+#inventory-list, .settings-options {
+    text-align: left;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+}
+
+#inventory-list p {
+    color: rgba(255,255,255,0.7);
+}
+
+.settings-options label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.settings-options input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 8px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 5px;
+    outline: none;
+}
+
+.settings-options input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: 2px solid white;
 }

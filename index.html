@@ -7,96 +7,27 @@
     <meta name="theme-color" content="#1a1a2e">
     <link rel="icon" href="favicon.ico">
     <title>Метавселенная PRO 2.0</title>
-    <link rel="icon" href="data:,"> <!-- Пустая иконка -->
+    <link rel="icon" href="data:,"> <!-- Пустая иконка, чтобы избежать запроса favicon.ico -->
+    
     <!-- Обновлённые стили и скрипты -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Three.js - основная библиотека для 3D -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>  
+    <!-- OrbitControls - для управления камерой мышью -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <!-- GLTFLoader - для загрузки 3D-моделей в формате GLTF (пока не используется, но пригодится) -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- XRControllerModelFactory - для VR/AR контроллеров -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/webxr/XRControllerModelFactory.js"></script>
+    <!-- Socket.IO - для реального времени (чат, мультиплеер) -->
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <!-- Axios - для HTTP-запросов (если понадобится) -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Твой основной скрипт -->
     <script src="main.js" type="module" defer></script>
 </head>
 <body>
     <!-- Добавлен прелоадер с анимацией -->
-    <div id="preloader">
-        <div class="loader"></div>
-        <p>Загрузка метавселенной...</p>
-        <div class="progress-bar">
-            <div class="progress"></div>
-        </div>
-    </div>
-
-    <!-- Основная структура остаётся, но с новыми элементами -->
-    <div id="metaverse-container"></div>
-    
-    <div id="ui-container">
-        <!-- Добавлена мини-карта -->
-        <div id="mini-map"></div>
-        
-        <!-- Обновлённая панель режимов -->
-        <div id="mode-panel">
-            <button id="vr-btn">VR</button>
-            <button id="ar-btn">AR</button>
-            <button id="3d-btn" class="active">3D</button>
-            <button id="settings-btn">⚙️</button>
-        </div>
-
-        <!-- Дополненная панель пользователя -->
-        <div id="user-panel">
-            <div id="avatar-container">
-                <div id="avatar"></div>
-                <div id="user-info">
-                    <span class="username"></span>
-                    <span class="level">Уровень: 1</span>
-                </div>
-            </div>
-            
-            <!-- Добавлен опыт и валюта -->
-            <div class="experience-bar">
-                <div class="progress"></div>
-            </div>
-            <div class="currency">100 монет</div>
-            
-            <!-- Остальные элементы остаются -->
-        </div>
-
-        <!-- Чат с улучшениями -->
-        <div id="chat-panel">
-            <!-- Добавлены вкладки -->
-            <div class="chat-tabs">
-                <button class="active">Общий</button>
-                <button>Группы</button>
-                <button>Приват</button>
-            </div>
-            <!-- Остальное без изменений -->
-        </div>
-    </div>
-
-    <!-- Новые модальные окна -->
-    <div id="inventory-modal" class="modal">
-        <!-- Содержимое инвентаря -->
-    </div>
-
-    <div id="shop-modal" class="modal">
-        <!-- Виртуальный магазин -->
-    </div>
-
-    <!-- Остальные модальные окна остаются -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Метавселенная PRO</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/webxr/XRControllerModelFactory.js"></script>
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="main.js" defer></script>
-</head>
-<body>
-    <!-- Экран загрузки -->
     <div id="loading-screen">
         <div class="loader"></div>
         <p id="loading-text">Инициализация метавселенной...</p>
@@ -107,43 +38,67 @@
 
     <!-- Контейнер для 3D сцены -->
     <div id="metaverse-container"></div>
-
-    <!-- Основной интерфейс -->
+    
+    <!-- Основной интерфейс пользователя -->
     <div id="ui-container">
-        <!-- Уведомления -->
+        <!-- Мини-карта -->
+        <div id="mini-map"></div>
+        
+        <!-- Контейнер для уведомлений -->
         <div id="notification-container"></div>
 
-        <!-- Панель режимов -->
+        <!-- Панель режимов (VR, AR, 3D, Настройки) -->
         <div id="mode-panel">
             <button id="vr-btn" class="mode-btn">VR</button>
             <button id="ar-btn" class="mode-btn">AR</button>
             <button id="3d-btn" class="mode-btn active">3D</button>
+            <button id="settings-btn" class="mode-btn">⚙️</button>
         </div>
 
         <!-- Панель пользователя -->
         <div id="user-panel">
             <div id="avatar-container" class="clickable">
                 <div id="avatar"></div>
-                <div id="user-info"></div>
+                <div id="user-info">
+                    <span class="username">Гость</span>
+                    <span class="level">Уровень: 1</span>
+                </div>
             </div>
             
+            <!-- Полоса опыта -->
+            <div class="experience-bar">
+                <div class="progress"></div>
+            </div>
+            <!-- Валюта -->
+            <div class="currency">0 монет</div>
+
+            <!-- Кнопки действий -->
             <div id="action-buttons">
                 <button class="action-btn" data-mode="learn">🎓 Обучение</button>
                 <button class="action-btn" data-mode="work">💼 Работа</button>
                 <button class="action-btn" data-mode="fun">🎮 Развлечения</button>
                 <button id="friends-btn" class="action-btn">👥 Друзья</button>
                 <button id="games-btn" class="action-btn">🎲 Игры</button>
+                <button id="inventory-btn" class="action-btn">🎒 Инвентарь</button>
+                <button id="shop-btn" class="action-btn">🛒 Магазин</button>
             </div>
             
+            <!-- Статистика -->
             <div id="stats">
                 <div class="stat"><span>⏳</span> <span id="time-spent">0m</span></div>
-                <div class="stat"><span>🏆</span> <span id="achievements-count">0</span></div>
+                <div class="stat clickable"><span>🏆</span> <span id="achievements-count">0</span></div>
                 <div class="stat"><span>👥</span> <span id="friends-online">0</span></div>
             </div>
         </div>
 
-        <!-- Чат -->
+        <!-- Панель чата -->
         <div id="chat-panel">
+            <!-- Вкладки чата -->
+            <div class="chat-tabs">
+                <button class="active">Общий</button>
+                <button>Группы</button>
+                <button>Приват</button>
+            </div>
             <div id="chat-messages"></div>
             <div id="chat-input-container">
                 <input type="text" id="chat-input" placeholder="Введите сообщение...">
@@ -153,6 +108,7 @@
     </div>
 
     <!-- Модальные окна -->
+    <!-- Модальное окно выбора аватара -->
     <div id="avatar-modal" class="modal">
         <div class="modal-content">
             <h2>Выберите аватар</h2>
@@ -179,6 +135,7 @@
         </div>
     </div>
 
+    <!-- Модальное окно друзей -->
     <div id="friends-modal" class="modal">
         <div class="modal-content">
             <h2>Друзья</h2>
@@ -191,6 +148,7 @@
         </div>
     </div>
 
+    <!-- Модальное окно мини-игр -->
     <div id="games-modal" class="modal">
         <div class="modal-content">
             <h2>Мини-игры</h2>
@@ -212,6 +170,7 @@
         </div>
     </div>
 
+    <!-- Модальное окно достижений -->
     <div id="achievements-modal" class="modal">
         <div class="modal-content">
             <h2>Достижения</h2>
@@ -220,12 +179,45 @@
         </div>
     </div>
 
-    <!-- AR маркер (для AR режима) -->
+    <!-- НОВЫЕ МОДАЛЬНЫЕ ОКНА -->
+    <!-- Модальное окно инвентаря -->
+    <div id="inventory-modal" class="modal">
+        <div class="modal-content">
+            <h2>Инвентарь</h2>
+            <div id="inventory-list"></div>
+            <button class="close-modal">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно магазина -->
+    <div id="shop-modal" class="modal">
+        <div class="modal-content">
+            <h2>Магазин</h2>
+            <div id="shop-items-grid" class="games-grid">
+                <!-- Товары магазина будут загружаться сюда JS -->
+            </div>
+            <button class="close-modal">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно настроек -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <h2>Настройки</h2>
+            <div class="settings-options">
+                <label for="volume-slider">Громкость:</label>
+                <input type="range" id="volume-slider" min="0" max="100" value="50">
+            </div>
+            <button class="close-modal">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- AR маркер (для AR режима) - пока скрыт -->
     <div id="ar-marker" style="display:none;">
         <img src="https://storage.googleapis.com/ar-js-inaturalist/marker-files/hiro.png" alt="AR Marker">
     </div>
 
-    <!-- Шаблоны -->
+    <!-- Шаблоны для динамически добавляемых элементов -->
     <template id="friend-template">
         <div class="friend-item">
             <div class="friend-avatar"></div>
